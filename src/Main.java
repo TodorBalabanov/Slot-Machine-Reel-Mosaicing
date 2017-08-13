@@ -308,14 +308,147 @@ public class Main {
 	}
 
 	/**
+	 * Generate reel on a stair based approach.
+	 * 
+	 * @param reel
+	 *            Current reel.
+	 */
+	private static void stairs(String reel) {
+		if (reel.endsWith(REEL_END) == true) {
+			if (valid(reel) == true) {
+				System.out.print("VALID:\t");
+			} else {
+				System.out.print("INVALID:\t");
+			}
+
+			System.out.println(reel);
+
+			return;
+		}
+
+		if (reel.length() > MAX_REEL_LENGTH) {
+			return;
+		}
+
+		for (String neighbor : NEIGHBORS.get(reel.substring(reel.length() - 6))) {
+			String result = merge(reel, neighbor);
+			if (result.length() == reel.length() + 2) {
+				stairs(result);
+			}
+		}
+	}
+
+	/**
+	 * Generate reel on a stair based approach.
+	 * 
+	 * @param reel
+	 *            Current reel.
+	 */
+	private static void monteCarlostairs(String reel) {
+		/*
+		 * End with positive result.
+		 */
+		if (reel.endsWith(REEL_END) == true) {
+			if (valid(reel) == true) {
+				System.out.print("  VALID:");
+			} else {
+				System.out.print("INVALID:");
+			}
+			System.out.print("\t");
+			System.out.println(reel);
+
+			return;
+		}
+
+		/*
+		 * Limit size of the reel.
+		 */
+		if (reel.length() > MAX_REEL_LENGTH) {
+			// System.err.println(reel);
+			return;
+		}
+
+		/*
+		 * List next possibilities.
+		 */
+		List<String> next = new ArrayList<String>();
+		for (String neighbor : NEIGHBORS.get(reel.substring(reel.length() - 6))) {
+			String result = merge(reel, neighbor);
+			if (result.length() == reel.length() + 2) {
+				next.add(result);
+			}
+		}
+
+		/*
+		 * There is no step ahead.
+		 */
+		if (next.isEmpty() == true) {
+			return;
+		}
+
+		/*
+		 * Step ahead in the generation process.
+		 */
+		Collections.shuffle(next);
+		monteCarlostairs(next.get(0));
+	}
+
+	/**
+	 * Connect two pieces in a single piece.
+	 * 
+	 * @param left
+	 *            Piece from the left side.
+	 * @param right
+	 *            Piece from the right side.
+	 * @return Single connected piece.
+	 */
+	private static String connect(String left, String right) {
+		return "";
+	}
+
+	/**
+	 * Array with pieces which should be connected between each other.
+	 * 
+	 * @param pieces
+	 *            Array of pieces.
+	 * @return Single connected string.
+	 */
+	private static String reconnect(String[] pieces) {
+		String result = "";
+
+		for (int i = 0; i < pieces.length - 1; i++) {
+			connect(pieces[i], pieces[i + 1]);
+		}
+
+		return result;
+	}
+
+	/**
 	 * Application single entry point method.
 	 * 
 	 * @param args
 	 *            Command line arguments.
 	 */
 	public static void main(String[] args) {
-		recursiveLevel = 1;
-		generate(REEL_START);
+		System.out.println("START");
+
+		// recursiveLevel = 1;
+		// generate(REEL_START);
+
+		stairs(REEL_START);
+
+		// for (long g = 0; g < 1000000L; g++) {
+		// monteCarlostairs(REEL_START);
+		// }
+
+		// reconnect(new String[] { "7777ppppccccssssdddd", "llllggggppppzdddd",
+		// "llllggggzppppggggccccssssdddd",
+		// "llllppppllll7777" });
+		// reconnect(new String[] { "7777ppppccccssssddddllll",
+		// "ggggzppppggggccccssssdddd", "llllggggppppzddddllll",
+		// "ppppllll7777" });
+
+		System.out.println("FINISH");
 	}
 
 }
