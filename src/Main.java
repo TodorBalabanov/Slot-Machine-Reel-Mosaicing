@@ -16,84 +16,84 @@ public class Main {
 	/**
 	 * Slot machine screen observations.
 	 */
-	public static final String OBSERVATIONS[] = { "7777пп", "7777пп", "7777пп", "777ппп", "777ппп", "777ппп", "777ппп",
-			"777ппп", "777ппп", "777ппп", "777ппп", "777ппп", "77пппп", "77пппп", "77пппп", "77пппп", "7ппппч",
-			"7ппппч", "7ппппч", "7ппппч", "7ппппч", "7ппппч", "7ппппч", "ггггзл", "ггггзп", "ггггзп", "ггггзп",
-			"ггггзп", "ггггзп", "ггггзп", "ггггпп", "ггггпп", "ггггчч", "ггггчч", "ггггчч", "ггггчч", "гггзпп",
-			"гггзпп", "гггзпп", "гггзпп", "гггппп", "гггппп", "гггппп", "гггччч", "гггччч", "гггччч", "гггччч",
-			"гггччч", "ггзппп", "ггзппп", "ггзппп", "ггзппп", "ггзппп", "ггпппп", "ггчччч", "ггчччч", "ггчччч",
-			"ггчччч", "ггчччч", "гзпппп", "гзпппп", "гллллг", "гппппз", "гппппз", "гппппз", "гппппз", "гппппз",
-			"гппппз", "гппппз", "гччччс", "гччччс", "гччччс", "гччччс", "гччччс", "ддддлл", "ддддлл", "ддддлл",
-			"ддддлл", "ддддлл", "ддддлл", "ддддлл", "ддддлл", "ддддлл", "ддддлл", "ддддлл", "ддддлл", "дддллл",
-			"дддллл", "дддллл", "дддллл", "дддллл", "дддллл", "дддллл", "дддллл", "дддллл", "дддллл", "дддллл",
-			"дддллл", "дддллл", "дддллл", "дддллл", "ддлллл", "ддлллл", "ддлллл", "ддлллл", "ддлллл", "ддлллл",
-			"ддлллл", "ддлллл", "ддлллл", "ддлллл", "ддлллл", "ддлллл", "ддлллл", "ддлллл", "дллллг", "дллллг",
-			"дллллг", "дллллг", "дллллг", "дллллг", "дллллп", "дллллп", "дллллп", "дллллп", "дллллп", "дллллп",
-			"дллллп", "дллллп", "дллллс", "дллллс", "дллллс", "дллллс", "дллллс", "дллллс", "дллллс", "дллллс",
-			"зддддл", "зддддл", "зддддл", "зддддл", "зддддл", "зддддл", "зддддл", "зддддл", "зддддл", "зппппг",
-			"зппппг", "зппппг", "зппппг", "зппппг", "зппппг", "л7777п", "л7777п", "л7777п", "л7777п", "л7777п",
-			"л7777п", "л7777п", "л7777п", "лггггз", "лггггз", "лггггз", "лггггз", "лггггз", "лггггз", "лггггп",
-			"лггггп", "лггггп", "лггггп", "лггггп", "лл7777", "лл7777", "лл7777", "лл7777", "лл7777", "лл7777",
-			"лл7777", "лл7777", "ллгггг", "ллгггг", "ллгггг", "ллгггг", "ллгггг", "ллгггг", "ллл777", "ллл777",
-			"ллл777", "ллл777", "ллл777", "ллл777", "ллл777", "ллл777", "ллл777", "ллл777", "ллл777", "ллл777",
-			"лллггг", "лллггг", "лллггг", "лллггг", "лллггг", "лллггг", "лллггг", "лллггг", "лллггг", "лллггг",
-			"лллггг", "лллггг", "лллггг", "лллл77", "лллл77", "лллл77", "лллл77", "лллл77", "лллл77", "ллллгг",
-			"ллллгг", "ллллгг", "ллллгг", "ллллгг", "ллллгг", "ллллгг", "ллллгг", "ллллгг", "ллллгг", "ллллгг",
-			"ллллгг", "ллллгг", "ллллпп", "ллллпп", "ллллпп", "ллллпп", "ллллпп", "ллллпп", "ллллпп", "ллллпп",
-			"ллллпп", "ллллпп", "ллллпп", "ллллпп", "ллллпп", "ллллпп", "ллллпп", "ллллсс", "ллллсс", "ллллсс",
-			"ллллсс", "ллллсс", "ллллсс", "ллллсс", "лллппп", "лллппп", "лллппп", "лллппп", "лллппп", "лллппп",
-			"лллппп", "лллппп", "лллппп", "лллппп", "лллссс", "лллссс", "лллссс", "лллссс", "лллссс", "лллссс",
-			"лллссс", "лллссс", "лллссс", "лллссс", "ллпппп", "ллпппп", "ллпппп", "ллпппп", "ллпппп", "ллпппп",
-			"ллпппп", "ллпппп", "ллпппп", "ллпппп", "ллпппп", "ллпппп", "ллпппп", "ллпппп", "ллпппп", "ллсссс",
-			"ллсссс", "ллсссс", "ллсссс", "ллсссс", "ллсссс", "лппппл", "лппппл", "лппппл", "лппппл", "лппппл",
-			"лппппс", "лппппс", "лппппс", "лппппс", "лппппс", "лппппс", "лппппс", "лссссл", "лссссл", "лссссл",
-			"лссссл", "лссссл", "пггггч", "пггггч", "пггггч", "пггггч", "пггггч", "пггггч", "пггггч", "пггггч",
-			"пздддд", "пздддд", "пздддд", "пздддд", "пздддд", "пздддд", "пздддд", "плллл7", "плллл7", "плллл7",
-			"ппгггг", "ппгггг", "ппгггг", "ппгггг", "ппгггг", "ппзддд", "ппзддд", "ппзддд", "ппзддд", "ппзддд",
-			"ппзддд", "ппзддд", "пплллл", "пплллл", "пплллл", "пплллл", "пплллл", "пппггг", "пппггг", "пппггг",
-			"пппггг", "пппггг", "пппздд", "пппздд", "пппздд", "пппздд", "пппздд", "пппздд", "пппздд", "пппздд",
-			"пппллл", "пппллл", "пппллл", "пппллл", "пппллл", "ппппгг", "ппппгг", "ппппгг", "ппппзд", "ппппзд",
-			"ппппзд", "ппппзд", "пппплл", "пппплл", "пппплл", "пппплл", "пппплл", "пппплл", "пппплл", "пппплл",
-			"ппппсс", "ппппсс", "ппппсс", "ппппсс", "ппппчч", "ппппчч", "ппппчч", "ппппчч", "пппссс", "пппссс",
-			"пппссс", "пппссс", "пппссс", "пппссс", "пппссс", "пппссс", "пппччч", "пппччч", "пппччч", "пппччч",
-			"пппччч", "пппччч", "пппччч", "ппсссс", "ппсссс", "ппсссс", "ппсссс", "ппсссс", "ппсссс", "ппсссс",
-			"ппсссс", "ппсссс", "ппсссс", "ппсссс", "ппсссс", "ппсссс", "ппсссс", "ппчччч", "ппчччч", "ппчччч",
-			"ппчччч", "ппчччч", "ппчччч", "пссссч", "пссссч", "пччччс", "пччччс", "пччччс", "пччччс", "пччччс",
-			"пччччс", "пччччс", "пччччс", "пччччс", "сддддл", "сддддл", "сддддл", "сддддл", "сддддл", "сддддл",
-			"сддддл", "сддддл", "сддддл", "сддддл", "сддддл", "сддддл", "сддддл", "сддддл", "сллллп", "сллллп",
-			"сллллп", "сллллп", "сллллп", "сллллп", "ссдддд", "ссдддд", "ссдддд", "ссдддд", "ссдддд", "ссдддд",
-			"ссдддд", "ссдддд", "ссдддд", "ссдддд", "ссдддд", "ссдддд", "ссдддд", "ссдддд", "ссдддд", "сслллл",
-			"сслллл", "сслллл", "сслллл", "сслллл", "сслллл", "сслллл", "сслллл", "сслллл", "сслллл", "сссддд",
-			"сссддд", "сссддд", "сссддд", "сссддд", "сссддд", "сссддд", "сссддд", "сссддд", "сссддд", "сссддд",
-			"сссддд", "сссллл", "сссллл", "сссллл", "сссллл", "сссллл", "ссссдд", "ссссдд", "ссссдд", "ссссдд",
-			"ссссдд", "ссссдд", "ссссдд", "ссссдд", "ссссдд", "ссссдд", "ссссдд", "ссссдд", "ссссдд", "ссссдд",
-			"ссссдд", "ссссдд", "ссссдд", "сссслл", "сссслл", "сссслл", "сссслл", "сссслл", "сссслл", "сссслл",
-			"ссссчч", "ссссчч", "ссссчч", "ссссчч", "сссччч", "сссччч", "сссччч", "сссччч", "сссччч", "сссччч",
-			"сссччч", "сссччч", "сссччч", "ссчччч", "сччччл", "сччччл", "сччччл", "сччччл", "чллллг", "чллллг",
-			"чллллг", "чллллг", "чллллг", "чссссд", "чссссд", "чссссд", "чссссд", "чссссд", "чссссд", "чссссд",
-			"чссссд", "чссссд", "чссссд", "чссссд", "чссссд", "чссссд", "ччлллл", "ччлллл", "ччлллл", "ччсссс",
-			"ччсссс", "ччсссс", "ччсссс", "ччсссс", "ччсссс", "ччсссс", "ччсссс", "ччсссс", "ччсссс", "ччсссс",
-			"ччсссс", "ччсссс", "чччллл", "чччллл", "чччллл", "чччллл", "чччссс", "чччссс", "чччссс", "чччссс",
-			"чччссс", "чччссс", "чччссс", "чччссс", "чччссс", "чччссс", "чччссс", "чччссс", "чччссс", "ччччлл",
-			"ччччлл", "ччччлл", "ччччлл", "ччччлл", "ччччлл", "ччччлл", "ччччлл", "ччччлл", "ччччлл", "ччччлл",
-			"ччччлл", "ччччсс", "ччччсс", "ччччсс", "ччччсс", "ччччсс", "ччччсс", "ччччсс", "ччччсс", "ччччсс",
-			"ччччсс", "ччччсс", "ччччсс", "ччччсс", "ччччсс", };
+	public static final String OBSERVATIONS[] = { "7777pp", "7777pp", "7777pp", "777ppp", "777ppp", "777ppp", "777ppp",
+			"777ppp", "777ppp", "777ppp", "777ppp", "777ppp", "77pppp", "77pppp", "77pppp", "77pppp", "7ppppc",
+			"7ppppc", "7ppppc", "7ppppc", "7ppppc", "7ppppc", "7ppppc", "ggggzl", "ggggzp", "ggggzp", "ggggzp",
+			"ggggzp", "ggggzp", "ggggzp", "ggggpp", "ggggpp", "ggggcc", "ggggcc", "ggggcc", "ggggcc", "gggzpp",
+			"gggzpp", "gggzpp", "gggzpp", "gggppp", "gggppp", "gggppp", "gggccc", "gggccc", "gggccc", "gggccc",
+			"gggccc", "ggzppp", "ggzppp", "ggzppp", "ggzppp", "ggzppp", "ggpppp", "ggcccc", "ggcccc", "ggcccc",
+			"ggcccc", "ggcccc", "gzpppp", "gzpppp", "gllllg", "gppppz", "gppppz", "gppppz", "gppppz", "gppppz",
+			"gppppz", "gppppz", "gccccs", "gccccs", "gccccs", "gccccs", "gccccs", "ddddll", "ddddll", "ddddll",
+			"ddddll", "ddddll", "ddddll", "ddddll", "ddddll", "ddddll", "ddddll", "ddddll", "ddddll", "dddlll",
+			"dddlll", "dddlll", "dddlll", "dddlll", "dddlll", "dddlll", "dddlll", "dddlll", "dddlll", "dddlll",
+			"dddlll", "dddlll", "dddlll", "dddlll", "ddllll", "ddllll", "ddllll", "ddllll", "ddllll", "ddllll",
+			"ddllll", "ddllll", "ddllll", "ddllll", "ddllll", "ddllll", "ddllll", "ddllll", "dllllg", "dllllg",
+			"dllllg", "dllllg", "dllllg", "dllllg", "dllllp", "dllllp", "dllllp", "dllllp", "dllllp", "dllllp",
+			"dllllp", "dllllp", "dlllls", "dlllls", "dlllls", "dlllls", "dlllls", "dlllls", "dlllls", "dlllls",
+			"zddddl", "zddddl", "zddddl", "zddddl", "zddddl", "zddddl", "zddddl", "zddddl", "zddddl", "zppppg",
+			"zppppg", "zppppg", "zppppg", "zppppg", "zppppg", "l7777p", "l7777p", "l7777p", "l7777p", "l7777p",
+			"l7777p", "l7777p", "l7777p", "lggggz", "lggggz", "lggggz", "lggggz", "lggggz", "lggggz", "lggggp",
+			"lggggp", "lggggp", "lggggp", "lggggp", "ll7777", "ll7777", "ll7777", "ll7777", "ll7777", "ll7777",
+			"ll7777", "ll7777", "llgggg", "llgggg", "llgggg", "llgggg", "llgggg", "llgggg", "lll777", "lll777",
+			"lll777", "lll777", "lll777", "lll777", "lll777", "lll777", "lll777", "lll777", "lll777", "lll777",
+			"lllggg", "lllggg", "lllggg", "lllggg", "lllggg", "lllggg", "lllggg", "lllggg", "lllggg", "lllggg",
+			"lllggg", "lllggg", "lllggg", "llll77", "llll77", "llll77", "llll77", "llll77", "llll77", "llllgg",
+			"llllgg", "llllgg", "llllgg", "llllgg", "llllgg", "llllgg", "llllgg", "llllgg", "llllgg", "llllgg",
+			"llllgg", "llllgg", "llllpp", "llllpp", "llllpp", "llllpp", "llllpp", "llllpp", "llllpp", "llllpp",
+			"llllpp", "llllpp", "llllpp", "llllpp", "llllpp", "llllpp", "llllpp", "llllss", "llllss", "llllss",
+			"llllss", "llllss", "llllss", "llllss", "lllppp", "lllppp", "lllppp", "lllppp", "lllppp", "lllppp",
+			"lllppp", "lllppp", "lllppp", "lllppp", "lllsss", "lllsss", "lllsss", "lllsss", "lllsss", "lllsss",
+			"lllsss", "lllsss", "lllsss", "lllsss", "llpppp", "llpppp", "llpppp", "llpppp", "llpppp", "llpppp",
+			"llpppp", "llpppp", "llpppp", "llpppp", "llpppp", "llpppp", "llpppp", "llpppp", "llpppp", "llssss",
+			"llssss", "llssss", "llssss", "llssss", "llssss", "lppppl", "lppppl", "lppppl", "lppppl", "lppppl",
+			"lpppps", "lpppps", "lpppps", "lpppps", "lpppps", "lpppps", "lpppps", "lssssl", "lssssl", "lssssl",
+			"lssssl", "lssssl", "pggggc", "pggggc", "pggggc", "pggggc", "pggggc", "pggggc", "pggggc", "pggggc",
+			"pzdddd", "pzdddd", "pzdddd", "pzdddd", "pzdddd", "pzdddd", "pzdddd", "pllll7", "pllll7", "pllll7",
+			"ppgggg", "ppgggg", "ppgggg", "ppgggg", "ppgggg", "ppzddd", "ppzddd", "ppzddd", "ppzddd", "ppzddd",
+			"ppzddd", "ppzddd", "ppllll", "ppllll", "ppllll", "ppllll", "ppllll", "pppggg", "pppggg", "pppggg",
+			"pppggg", "pppggg", "pppzdd", "pppzdd", "pppzdd", "pppzdd", "pppzdd", "pppzdd", "pppzdd", "pppzdd",
+			"ppplll", "ppplll", "ppplll", "ppplll", "ppplll", "ppppgg", "ppppgg", "ppppgg", "ppppzd", "ppppzd",
+			"ppppzd", "ppppzd", "ppppll", "ppppll", "ppppll", "ppppll", "ppppll", "ppppll", "ppppll", "ppppll",
+			"ppppss", "ppppss", "ppppss", "ppppss", "ppppcc", "ppppcc", "ppppcc", "ppppcc", "pppsss", "pppsss",
+			"pppsss", "pppsss", "pppsss", "pppsss", "pppsss", "pppsss", "pppccc", "pppccc", "pppccc", "pppccc",
+			"pppccc", "pppccc", "pppccc", "ppssss", "ppssss", "ppssss", "ppssss", "ppssss", "ppssss", "ppssss",
+			"ppssss", "ppssss", "ppssss", "ppssss", "ppssss", "ppssss", "ppssss", "ppcccc", "ppcccc", "ppcccc",
+			"ppcccc", "ppcccc", "ppcccc", "pssssc", "pssssc", "pccccs", "pccccs", "pccccs", "pccccs", "pccccs",
+			"pccccs", "pccccs", "pccccs", "pccccs", "sddddl", "sddddl", "sddddl", "sddddl", "sddddl", "sddddl",
+			"sddddl", "sddddl", "sddddl", "sddddl", "sddddl", "sddddl", "sddddl", "sddddl", "sllllp", "sllllp",
+			"sllllp", "sllllp", "sllllp", "sllllp", "ssdddd", "ssdddd", "ssdddd", "ssdddd", "ssdddd", "ssdddd",
+			"ssdddd", "ssdddd", "ssdddd", "ssdddd", "ssdddd", "ssdddd", "ssdddd", "ssdddd", "ssdddd", "ssllll",
+			"ssllll", "ssllll", "ssllll", "ssllll", "ssllll", "ssllll", "ssllll", "ssllll", "ssllll", "sssddd",
+			"sssddd", "sssddd", "sssddd", "sssddd", "sssddd", "sssddd", "sssddd", "sssddd", "sssddd", "sssddd",
+			"sssddd", "ssslll", "ssslll", "ssslll", "ssslll", "ssslll", "ssssdd", "ssssdd", "ssssdd", "ssssdd",
+			"ssssdd", "ssssdd", "ssssdd", "ssssdd", "ssssdd", "ssssdd", "ssssdd", "ssssdd", "ssssdd", "ssssdd",
+			"ssssdd", "ssssdd", "ssssdd", "ssssll", "ssssll", "ssssll", "ssssll", "ssssll", "ssssll", "ssssll",
+			"sssscc", "sssscc", "sssscc", "sssscc", "sssccc", "sssccc", "sssccc", "sssccc", "sssccc", "sssccc",
+			"sssccc", "sssccc", "sssccc", "sscccc", "sccccl", "sccccl", "sccccl", "sccccl", "cllllg", "cllllg",
+			"cllllg", "cllllg", "cllllg", "cssssd", "cssssd", "cssssd", "cssssd", "cssssd", "cssssd", "cssssd",
+			"cssssd", "cssssd", "cssssd", "cssssd", "cssssd", "cssssd", "ccllll", "ccllll", "ccllll", "ccssss",
+			"ccssss", "ccssss", "ccssss", "ccssss", "ccssss", "ccssss", "ccssss", "ccssss", "ccssss", "ccssss",
+			"ccssss", "ccssss", "ccclll", "ccclll", "ccclll", "ccclll", "cccsss", "cccsss", "cccsss", "cccsss",
+			"cccsss", "cccsss", "cccsss", "cccsss", "cccsss", "cccsss", "cccsss", "cccsss", "cccsss", "ccccll",
+			"ccccll", "ccccll", "ccccll", "ccccll", "ccccll", "ccccll", "ccccll", "ccccll", "ccccll", "ccccll",
+			"ccccll", "ccccss", "ccccss", "ccccss", "ccccss", "ccccss", "ccccss", "ccccss", "ccccss", "ccccss",
+			"ccccss", "ccccss", "ccccss", "ccccss", "ccccss", };
 
 	/**
 	 * Combinations used as controls of the reel correctness.
 	 */
-	private static final String CONTROLS[] = { "ллллггггзппппггггччччссссддддлллл", "7777ппппччччссссддддлллл",
-			"ллллггггппппзддддлллл", "ллллпппплллл7777", };
+	private static final String CONTROLS[] = { "llllggggzppppggggccccssssddddllll", "7777ppppccccssssddddllll",
+			"llllggggppppzddddllll", "llllppppllll7777", };
 
 	/**
 	 * Reel start combination.
 	 */
-	private static final String REEL_START = "7777ппппччччссссддддлллл";
+	private static final String REEL_START = "7777ppppccccssssddddllll";
 
 	/**
 	 * Reel end combination.
 	 */
-	private static final String REEL_END = "ллллпппплллл7777";
+	private static final String REEL_END = "llllppppllll7777";
 
 	/**
 	 * Do not use pieces with some symbols.
@@ -224,7 +224,16 @@ public class Main {
 			 * Merge end with part of the neighbor.
 			 */
 			if (reel.endsWith(neighbor.substring(0, l)) == true) {
-				return reel + neighbor.substring(l);
+				String result = reel + neighbor.substring(l);
+
+				/*
+				 * Build reels only with valid pieces inside.
+				 */
+				if (NEIGHBORS.containsKey(reel.substring(reel.length() - 6)) == true) {
+					return result;
+				} else {
+					return reel;
+				}
 			}
 		}
 
@@ -265,7 +274,7 @@ public class Main {
 			if (valid(reel) == true) {
 				System.out.println("VALID:\t" + reel);
 			} else {
-				// System.out.println("INVALID:\t" + reel);
+				System.out.println("INVALID:\t" + reel);
 			}
 
 			return;
@@ -276,7 +285,7 @@ public class Main {
 		 * generation process.
 		 */
 		if (reel.length() > MAX_REEL_LENGTH) {
-			// System.out.println("INVALID:\t" + reel);
+			System.err.println("TOO LONG:\t" + reel);
 			return;
 		}
 
