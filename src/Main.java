@@ -113,6 +113,11 @@ public class Main {
 	 */
 	private static final Map<String, List<String>> NEIGHBORS = new HashMap<String, List<String>>();
 
+	/**
+	 * Keep track of recursive levels.
+	 */
+	private static int recursiveLevel = 0;
+
 	/*
 	 * Initialization of the static variables.
 	 */
@@ -285,11 +290,14 @@ public class Main {
 			/*
 			 * Some kind of calculation progress printing.
 			 */
-			if (reel.equals(REEL_START) == true) {
-				System.err.println(NEIGHBORS.get(reel.substring(reel.length() - 6)).size());
+			if (recursiveLevel <= 9) {
+				System.err
+						.println("L" + recursiveLevel + "\t" + NEIGHBORS.get(reel.substring(reel.length() - 6)).size());
 			}
 
+			recursiveLevel++;
 			generate(merge(reel, neighbor));
+			recursiveLevel--;
 		}
 	}
 
@@ -300,6 +308,7 @@ public class Main {
 	 *            Command line arguments.
 	 */
 	public static void main(String[] args) {
+		recursiveLevel = 1;
 		generate(REEL_START);
 	}
 
