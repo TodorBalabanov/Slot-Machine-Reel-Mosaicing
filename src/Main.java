@@ -86,12 +86,6 @@ public class Main {
 			"ccccss", "ccccss", "ccccss", "ccccss", "ccccss", };
 
 	/**
-	 * Combinations used as controls of the reel correctness.
-	 */
-	private static final String CONTROLS[] = { "llllggggzppppggggccccssssddddllll", "7777ppppccccssssddddllll",
-			"llllggggppppzddddllll", "llllppppllll7777", };
-
-	/**
 	 * Reel start combination.
 	 */
 	private static final String REEL_START = "7777ppppccccssssddddllll";
@@ -102,9 +96,10 @@ public class Main {
 	private static final String REEL_END = "llllppppllll7777";
 
 	/**
-	 * Do not use pieces with some symbols.
+	 * Combinations used as controls of the reel correctness.
 	 */
-	private static final String ESCAPE_PIECES_WITH[] = { "7" };
+	private static final String CONTROLS[] = { REEL_START, "llllggggzppppggggccccssssddddllll", "llllggggppppzddddllll",
+			REEL_END };
 
 	/**
 	 * Minimal generated reel length.
@@ -154,19 +149,16 @@ public class Main {
 				// TODO Different criteria for neighbor can speed up
 				// calculations.
 
-				/*
-				 * First check is for combination with an element less, because
-				 * combination should not be neighbor of itself.
-				 */
-				for (int l = neighbor.length() - 2; l > 0; l--) {
-					if (observation.endsWith(neighbor.substring(0, l)) == true
-							&& NEIGHBORS.get(observation).contains(neighbor) == false) {
-						NEIGHBORS.get(observation).add(neighbor);
-						break;
-					}
+				if (observation.endsWith(neighbor.substring(0, 5)) == true
+						&& NEIGHBORS.get(observation).contains(neighbor) == false) {
+					NEIGHBORS.get(observation).add(neighbor);
 				}
 			}
 		}
+
+		/*
+		 * TODO Add 3 special pieces from the controls.
+		 */
 	}
 
 	/**
@@ -178,27 +170,19 @@ public class Main {
 	 */
 	private static boolean valid(String reel) {
 		/*
-		 * Check ends of the reel.
+		 * Check control pieces to be presented.
 		 */
-		if (reel.startsWith(REEL_START) == false || reel.endsWith(REEL_END) == false) {
-			return false;
+		for (String control : CONTROLS) {
+			if (reel.contains(control) == false) {
+				return false;
+			}
 		}
 
 		/*
-		 * Check observed pieces to be presented.
+		 * Check all observed pieces to be presented.
 		 */
-		for (String control : CONTROLS) {
-			/*
-			 * Some of the pieces are sure to be presented.
-			 */
-			if (escape(control) == true) {
-				continue;
-			}
-
-			/*
-			 * All other pieces should be checked.
-			 */
-			if (reel.contains(control) == false) {
+		for (String piece : OBSERVATIONS) {
+			if (reel.contains(piece.substring(1, piece.length() - 1)) == false) {
 				return false;
 			}
 		}
@@ -236,23 +220,6 @@ public class Main {
 		}
 
 		return "";
-	}
-
-	/**
-	 * Escape some pieces, because it is known that they are already presented.
-	 * 
-	 * @param neighbor
-	 *            Neighbor to check.
-	 * @return True if it should be skipped, false otherwise.
-	 */
-	private static boolean escape(String neighbor) {
-		for (String e : ESCAPE_PIECES_WITH) {
-			if (neighbor.contains(e) == true) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	/**
@@ -376,13 +343,18 @@ public class Main {
 			 * There is no step ahead.
 			 */
 			if (next == null || next.length == 0) {
-				continue;
+				break;
 			}
 
 			/*
 			 * Step ahead in the generation process.
 			 */
-			reel = merge(reel, (String) next[PRNG.nextInt(next.length)]);
+			String merged = merge(reel, (String) next[PRNG.nextInt(next.length)]);
+			if (merged.equals(reel) || merged.equals("")) {
+				break;
+			} else {
+				reel = merged;
+			}
 		} while (reel.length() < MAX_REEL_LENGTH);
 		// System.err.println(reel);
 	}
