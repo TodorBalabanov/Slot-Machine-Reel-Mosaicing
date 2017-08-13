@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Application single entry point class.
@@ -111,7 +113,7 @@ public class Main {
 	/**
 	 * Combinations which are neighbors.
 	 */
-	private static final Map<String, List<String>> NEIGHBORS = new HashMap<String, List<String>>();
+	private static final Map<String, Set<String>> NEIGHBORS = new HashMap<String, Set<String>>();
 
 	/**
 	 * Keep track of recursive levels.
@@ -134,7 +136,7 @@ public class Main {
 			/*
 			 * All neighbors of a combination are presented as list.
 			 */
-			NEIGHBORS.put(observation, new ArrayList<String>());
+			NEIGHBORS.put(observation, new HashSet<String>());
 			for (String neighbor : OBSERVATIONS) {
 				/*
 				 * Combination is not counted as neighbor if itself.
@@ -151,7 +153,7 @@ public class Main {
 					continue;
 				}
 
-				// TODO Different criteria for neighbor can seep up
+				// TODO Different criteria for neighbor can speed up
 				// calculations.
 
 				/*
@@ -166,11 +168,6 @@ public class Main {
 					}
 				}
 			}
-
-			/*
-			 * Sorted list are faster for calculations.
-			 */
-			Collections.sort(NEIGHBORS.get(observation));
 		}
 	}
 
