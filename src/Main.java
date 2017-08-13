@@ -314,27 +314,33 @@ public class Main {
 	 *            Current reel.
 	 */
 	private static void stairs(String reel) {
+		/*
+		 * Check for reel length.
+		 */
 		if (reel.endsWith(REEL_END) == true) {
 			if (valid(reel) == true) {
 				System.out.print("VALID:\t");
 			} else {
 				System.out.print("INVALID:\t");
 			}
-
 			System.out.println(reel);
 
 			return;
 		}
 
+		/*
+		 * Limit reel size.
+		 */
 		if (reel.length() > MAX_REEL_LENGTH) {
+			// System.err.println(reel);
 			return;
 		}
 
+		/*
+		 * Process ahead.
+		 */
 		for (String neighbor : NEIGHBORS.get(reel.substring(reel.length() - 6))) {
-			String result = merge(reel, neighbor);
-			if (result.length() == reel.length() + 2) {
-				stairs(result);
-			}
+			stairs(merge(reel, neighbor));
 		}
 	}
 
@@ -344,7 +350,7 @@ public class Main {
 	 * @param reel
 	 *            Current reel.
 	 */
-	private static void monteCarlostairs(String reel) {
+	private static void monteCarloStairs(String reel) {
 		/*
 		 * End with positive result.
 		 */
@@ -373,10 +379,7 @@ public class Main {
 		 */
 		List<String> next = new ArrayList<String>();
 		for (String neighbor : NEIGHBORS.get(reel.substring(reel.length() - 6))) {
-			String result = merge(reel, neighbor);
-			if (result.length() == reel.length() + 2) {
-				next.add(result);
-			}
+			next.add(merge(reel, neighbor));
 		}
 
 		/*
@@ -390,7 +393,7 @@ public class Main {
 		 * Step ahead in the generation process.
 		 */
 		Collections.shuffle(next);
-		monteCarlostairs(next.get(0));
+		monteCarloStairs(next.get(0));
 	}
 
 	/**
@@ -435,11 +438,18 @@ public class Main {
 		// recursiveLevel = 1;
 		// generate(REEL_START);
 
-		stairs(REEL_START);
+		// stairs(REEL_START);
 
-		// for (long g = 0; g < 1000000L; g++) {
-		// monteCarlostairs(REEL_START);
-		// }
+		final long EXPERIMENTS = 10000000000L;
+		final long INTERVAL = 10000L;
+		for (long g = 0L, interval = (EXPERIMENTS / INTERVAL) <= 0 ? 1
+				: (EXPERIMENTS / INTERVAL); g < EXPERIMENTS; g++) {
+			if (g % interval == 0) {
+				System.err.println(String.format("%5.2f", (100D * g / EXPERIMENTS)) + "%");
+			}
+
+			monteCarloStairs(REEL_START);
+		}
 
 		// reconnect(new String[] { "7777ppppccccssssdddd", "llllggggppppzdddd",
 		// "llllggggzppppggggccccssssdddd",
