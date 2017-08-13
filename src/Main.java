@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -12,6 +13,11 @@ import java.util.Set;
  * @author Todor Balabanov
  */
 public class Main {
+
+	/**
+	 * Pseudo-random number generator.
+	 */
+	private static final Random PRNG = new Random();
 
 	/**
 	 * Slot machine screen observations.
@@ -142,14 +148,6 @@ public class Main {
 				 * Combination is not counted as neighbor if itself.
 				 */
 				if (observation.equals(neighbor) == true) {
-					continue;
-				}
-
-				/*
-				 * Escape some pieces, because it is known that they are already
-				 * presented.
-				 */
-				if (escape(neighbor) == true) {
 					continue;
 				}
 
@@ -351,49 +349,42 @@ public class Main {
 	 *            Current reel.
 	 */
 	private static void monteCarloStairs(String reel) {
-		/*
-		 * End with positive result.
-		 */
-		if (reel.endsWith(REEL_END) == true) {
-			if (valid(reel) == true) {
-				System.out.print("  VALID:");
-			} else {
-				System.out.print("INVALID:");
+		do {
+			/*
+			 * End with positive result.
+			 */
+			if (reel.endsWith(REEL_END) == true) {
+				if (valid(reel) == true) {
+					System.out.print("  VALID:");
+					System.out.print("\t");
+					System.out.println(reel);
+				} else {
+					// System.out.print("INVALID:");
+					// System.out.print("\t");
+					// System.out.println(reel);
+				}
+
+				return;
 			}
-			System.out.print("\t");
-			System.out.println(reel);
 
-			return;
-		}
+			/*
+			 * List next possibilities.
+			 */
+			Object next[] = NEIGHBORS.get(reel.substring(reel.length() - 6)).toArray();
 
-		/*
-		 * Limit size of the reel.
-		 */
-		if (reel.length() > MAX_REEL_LENGTH) {
-			// System.err.println(reel);
-			return;
-		}
+			/*
+			 * There is no step ahead.
+			 */
+			if (next == null || next.length == 0) {
+				continue;
+			}
 
-		/*
-		 * List next possibilities.
-		 */
-		List<String> next = new ArrayList<String>();
-		for (String neighbor : NEIGHBORS.get(reel.substring(reel.length() - 6))) {
-			next.add(merge(reel, neighbor));
-		}
-
-		/*
-		 * There is no step ahead.
-		 */
-		if (next.isEmpty() == true) {
-			return;
-		}
-
-		/*
-		 * Step ahead in the generation process.
-		 */
-		Collections.shuffle(next);
-		monteCarloStairs(next.get(0));
+			/*
+			 * Step ahead in the generation process.
+			 */
+			reel = merge(reel, (String) next[PRNG.nextInt(next.length)]);
+		} while (reel.length() < MAX_REEL_LENGTH);
+		// System.err.println(reel);
 	}
 
 	/**
