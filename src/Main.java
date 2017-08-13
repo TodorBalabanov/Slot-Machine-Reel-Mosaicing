@@ -157,12 +157,90 @@ public class Main {
 	}
 
 	/**
+	 * Check reel for having controlling combinations.
+	 * 
+	 * @param reel
+	 *            Generate reel.
+	 * @return True if it is a valid reel, false otherwise.
+	 */
+	private static boolean valid(String reel) {
+		for (String control : CONTROLS) {
+			if (reel.contains(control) == false) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Merge reel with neighbor at the end.
+	 * 
+	 * @param reel
+	 *            Current reel.
+	 * @param neighbor
+	 *            One of the neighbors.
+	 * @return Reel merged with the neighbor or empty string if there is a
+	 *         problem.
+	 */
+	private static String merge(String reel, String neighbor) {
+		for (int l = neighbor.length() - 1; l > 0; l--) {
+			/*
+			 * Merge end with part of the neighbor.
+			 */
+			if (reel.endsWith(neighbor.substring(0, l)) == true) {
+				return reel + neighbor.substring(l);
+			}
+		}
+
+		return "";
+	}
+
+	/**
+	 * Recursive function for reel generation.
+	 * 
+	 * @param reel
+	 *            Current state of the reel.
+	 */
+	private static void generate(String reel) {
+		/*
+		 * If the reel has desired end - finish generation process.
+		 */
+		if (reel.endsWith(REEL_END) == true) {
+			/*
+			 * Print only reels which are valid.
+			 */
+			if (valid(reel) == true) {
+				System.out.println(reel);
+			}
+
+			return;
+		}
+
+		/*
+		 * If the reel is too big it is more like to be incorrect - finish
+		 * generation process.
+		 */
+		if (reel.length() > MAX_REEL_LENGTH) {
+			return;
+		}
+
+		/*
+		 * List all neighbors and add it at the end.
+		 */
+		for (String neighbor : NEIGHBORS.get(reel.substring(reel.length() - 6))) {
+			generate(merge(reel, neighbor));
+		}
+	}
+
+	/**
 	 * Application single entry point method.
 	 * 
 	 * @param args
 	 *            Command line arguments.
 	 */
 	public static void main(String[] args) {
+		generate(REEL_START);
 	}
 
 }
