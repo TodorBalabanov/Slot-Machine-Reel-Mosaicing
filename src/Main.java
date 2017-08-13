@@ -86,12 +86,17 @@ public class Main {
 	/**
 	 * Reel start combination.
 	 */
-	private static final String REEL_START = "7777пп";
+	private static final String REEL_START = "7777ппппччччссссддддлллл";
 
 	/**
 	 * Reel end combination.
 	 */
-	private static final String REEL_END = "лл7777";
+	private static final String REEL_END = "ллллпппплллл7777";
+
+	/**
+	 * Do not use pieces with some symbols.
+	 */
+	private static final String ESCAPE_PIECES_WITH[] = { "7" };
 
 	/**
 	 * Minimal generated reel length.
@@ -133,6 +138,14 @@ public class Main {
 					continue;
 				}
 
+				/*
+				 * Escape some pieces, because it is known that they are already
+				 * presented.
+				 */
+				if (escape(neighbor) == true) {
+					continue;
+				}
+
 				// TODO Different criteria for neighbor can seep up
 				// calculations.
 
@@ -164,7 +177,27 @@ public class Main {
 	 * @return True if it is a valid reel, false otherwise.
 	 */
 	private static boolean valid(String reel) {
+		/*
+		 * Check ends of the reel.
+		 */
+		if (reel.startsWith(REEL_START) == false || reel.endsWith(REEL_END) == false) {
+			return false;
+		}
+
+		/*
+		 * Check observed pieces to be presented.
+		 */
 		for (String control : CONTROLS) {
+			/*
+			 * Some of the pieces are sure to be presented.
+			 */
+			if (escape(control) == true) {
+				continue;
+			}
+
+			/*
+			 * All other pieces should be checked.
+			 */
 			if (reel.contains(control) == false) {
 				return false;
 			}
@@ -197,6 +230,23 @@ public class Main {
 	}
 
 	/**
+	 * Escape some pieces, because it is known that they are already presented.
+	 * 
+	 * @param neighbor
+	 *            Neighbor to check.
+	 * @return True if it should be skipped, false otherwise.
+	 */
+	private static boolean escape(String neighbor) {
+		for (String e : ESCAPE_PIECES_WITH) {
+			if (neighbor.contains(e) == true) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Recursive function for reel generation.
 	 * 
 	 * @param reel
@@ -211,7 +261,9 @@ public class Main {
 			 * Print only reels which are valid.
 			 */
 			if (valid(reel) == true) {
-				System.out.println(reel);
+				System.out.println("VALID:\t" + reel);
+			} else {
+				// System.out.println("INVALID:\t" + reel);
 			}
 
 			return;
@@ -222,6 +274,7 @@ public class Main {
 		 * generation process.
 		 */
 		if (reel.length() > MAX_REEL_LENGTH) {
+			// System.out.println("INVALID:\t" + reel);
 			return;
 		}
 
@@ -229,6 +282,13 @@ public class Main {
 		 * List all neighbors and add it at the end.
 		 */
 		for (String neighbor : NEIGHBORS.get(reel.substring(reel.length() - 6))) {
+			/*
+			 * Some kind of calculation progress printing.
+			 */
+			if (reel.equals(REEL_START) == true) {
+				System.err.println(NEIGHBORS.get(reel.substring(reel.length() - 6)).size());
+			}
+
 			generate(merge(reel, neighbor));
 		}
 	}
