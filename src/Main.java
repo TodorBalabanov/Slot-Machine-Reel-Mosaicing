@@ -109,7 +109,7 @@ public class Main {
 	/**
 	 * Maximum generated reel length.
 	 */
-	private static final int MAX_REEL_LENGTH = 130;
+	private static final int MAX_REEL_LENGTH = 160;
 
 	/**
 	 * Combinations which are neighbors.
