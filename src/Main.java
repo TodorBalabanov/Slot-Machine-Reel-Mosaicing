@@ -1,8 +1,5 @@
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -314,24 +311,19 @@ public class Main {
 	 * 
 	 * @param reel
 	 *            Current reel.
+	 * @return Generated reel of empty string if it is not a valid reel.
 	 */
-	private static void monteCarloStairs(String reel) {
+	private static String monteCarloStairs(String reel) {
 		do {
 			/*
 			 * End with positive result.
 			 */
 			if (reel.endsWith(REEL_END) == true) {
 				if (valid(reel) == true) {
-					System.out.print("  VALID:");
-					System.out.print("\t");
-					System.out.println(reel);
-				} else {
-					// System.out.print("INVALID:");
-					// System.out.print("\t");
-					// System.out.println(reel);
+					return reel;
 				}
 
-				return;
+				return "";
 			}
 
 			/*
@@ -357,6 +349,8 @@ public class Main {
 			}
 		} while (reel.length() < MAX_REEL_LENGTH);
 		// System.err.println(reel);
+
+		return "";
 	}
 
 	/**
@@ -403,16 +397,18 @@ public class Main {
 
 		// stairs(REEL_START);
 
-		final long EXPERIMENTS = 10000000000L;
+		Set<String> solutions = new HashSet<String>();
 		final long INTERVAL = 10000L;
+		final long EXPERIMENTS = 10000000L;
 		for (long g = 0L, interval = (EXPERIMENTS / INTERVAL) <= 0 ? 1
 				: (EXPERIMENTS / INTERVAL); g < EXPERIMENTS; g++) {
 			if (g % interval == 0) {
 				System.err.println(String.format("%5.2f", (100D * g / EXPERIMENTS)) + "%");
 			}
 
-			monteCarloStairs(REEL_START);
+			solutions.add(monteCarloStairs(REEL_START));
 		}
+		System.out.println(solutions);
 
 		// reconnect(new String[] { "7777ppppccccssssdddd", "llllggggppppzdddd",
 		// "llllggggzppppggggccccssssdddd",
