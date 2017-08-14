@@ -468,7 +468,7 @@ public class Main {
 		 * Print solutions with frequencies distance.
 		 */
 		for (String solution : solutions) {
-			System.out.println(distance(solution) + "\t" + solution);
+			System.out.println(distance(solution) + "\t" + solution.length() + "\t" + solution);
 		}
 	}
 
