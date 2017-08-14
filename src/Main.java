@@ -83,6 +83,11 @@ public class Main {
 			"ccccss", "ccccss", "ccccss", "ccccss", "ccccss", };
 
 	/**
+	 * Slot machine screen observations.
+	 */
+	public static final Map<Character, Double> SYMBOLS_FREQUENCIES = new HashMap<Character, Double>();
+
+	/**
 	 * Reel start combination.
 	 */
 	private static final String REEL_START = "7777ppppccccssssddddllll";
@@ -156,6 +161,25 @@ public class Main {
 		/*
 		 * TODO Add 3 special pieces from the controls.
 		 */
+
+		/*
+		 * Calculate symbols frequencies.
+		 */
+		int total = 0;
+		int counters[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, };
+		for (String observation : OBSERVATIONS) {
+			for (int i = 0; i < observation.length(); i++) {
+				counters[observation.charAt(i) - '7']++;
+				total++;
+			}
+		}
+		for (int i = 0; i < counters.length; i++) {
+			if (counters[i] > 0) {
+				SYMBOLS_FREQUENCIES.put(Character.valueOf((char) ('7' + i)), (double) counters[i] / (double) total);
+			}
+		}
 	}
 
 	/**
@@ -384,6 +408,71 @@ public class Main {
 	}
 
 	/**
+	 * Euclidean distance between reel symbols frequencies and observation
+	 * symbols frequencies.
+	 * 
+	 * @param reel
+	 *            Generated reel.
+	 * @return Euclidean distance.
+	 */
+	private static double distance(String reel) {
+		int total = 0;
+		int counters[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, };
+		for (int i = 0; i < reel.length(); i++) {
+			counters[reel.charAt(i) - '7']++;
+			total++;
+		}
+
+		Map<Character, Double> frequencies = new HashMap<Character, Double>();
+		for (int i = 0; i < counters.length; i++) {
+			if (counters[i] > 0) {
+				frequencies.put(Character.valueOf((char) ('7' + i)), (double) counters[i] / (double) total);
+			}
+		}
+
+		/*
+		 * Euclidean distance
+		 */
+		double distance = 0;
+		for (Character symbol : frequencies.keySet()) {
+			double value = frequencies.get(symbol) - SYMBOLS_FREQUENCIES.get(symbol);
+			distance += value * value;
+		}
+
+		return Math.sqrt(distance);
+	}
+
+	/**
+	 * Monte-Carlo Search based reel reconstruction.
+	 */
+	private static void monte() {
+		final long INTERVAL = 10000L;
+		final long EXPERIMENTS = 100000000L;
+
+		/*
+		 * Solutions generation.
+		 */
+		Set<String> solutions = new HashSet<String>();
+		for (long g = 0L, interval = (EXPERIMENTS / INTERVAL) <= 0 ? 1
+				: (EXPERIMENTS / INTERVAL); g < EXPERIMENTS; g++) {
+			if (g % interval == 0) {
+				System.err.println(String.format("%5.2f", (100D * g / EXPERIMENTS)) + "%");
+			}
+
+			solutions.add(monteCarloStairs(REEL_START));
+		}
+
+		/*
+		 * Print solutions with frequencies distance.
+		 */
+		for (String solution : solutions) {
+			System.out.println(distance(solution) + "\t" + solution);
+		}
+	}
+
+	/**
 	 * Application single entry point method.
 	 * 
 	 * @param args
@@ -397,18 +486,7 @@ public class Main {
 
 		// stairs(REEL_START);
 
-		Set<String> solutions = new HashSet<String>();
-		final long INTERVAL = 10000L;
-		final long EXPERIMENTS = 10000000L;
-		for (long g = 0L, interval = (EXPERIMENTS / INTERVAL) <= 0 ? 1
-				: (EXPERIMENTS / INTERVAL); g < EXPERIMENTS; g++) {
-			if (g % interval == 0) {
-				System.err.println(String.format("%5.2f", (100D * g / EXPERIMENTS)) + "%");
-			}
-
-			solutions.add(monteCarloStairs(REEL_START));
-		}
-		System.out.println(solutions);
+		monte();
 
 		// reconnect(new String[] { "7777ppppccccssssdddd", "llllggggppppzdddd",
 		// "llllggggzppppggggccccssssdddd",
