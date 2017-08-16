@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -17,98 +18,87 @@ public class Main {
 	private static final Random PRNG = new Random();
 
 	/**
+	 * Size of the observed reel.
+	 */
+	private static final int OBSERVATION_SIZE = 4;
+
+	/**
+	 * Size of the observed reel.
+	 */
+	private static final int OVERLAP_SIZE = 1;
+
+	/**
 	 * Slot machine screen observations.
 	 */
-	public static final String OBSERVATIONS[] = { "ppllll", "sscccc", "pssssz", "sspppp", "ppgggg", "cssssp", "ppppss",
-			"pppccc", "ppcccc", "ggllll", "ppppss", "ccdddd", "gccccz", "ssslll", "lggggc", "ppssss", "lllggg",
-			"ppppdd", "lllddd", "lllppp", "ssllll", "zpppps", "ssslll", "ddpppp", "czpppp", "7777pp", "ssssll",
-			"lllldd", "ppppgg", "77777p", "ppppll", "pllllc", "ccssss", "ddpppp", "pppggg", "llllpp", "pppccc",
-			"sssppp", "ggggcc", "zpppps", "ccccss", "sssccc", "pssssl", "ggcccc", "ppppll", "ggggll", "dddppp",
-			"cccczp", "77pppp", "dppppg", "glllld", "sssppp", "ccccss", "glllld", "pddddl", "pggggl", "lllccc",
-			"sllllg", "pssssc", "sssppp", "cccddd", "dddppp", "zpppps", "ssslll", "zpppps", "pppsss", "ppgggg",
-			"g7777p", "ddpppp", "lggggp", "sllll7", "pppsss", "slllld", "lccccs", "pssssz", "ppppll", "ddddpp",
-			"lccccs", "ppssss", "llgggg", "cccsss", "ppdddd", "pssssl", "czpppp", "7777pp", "lldddd", "llllcc",
-			"ppppgg", "77777p", "dllllg", "ppppll", "sppppg", "ppdddd", "ddpppp", "lllddd", "gggccc", "gccccz",
-			"lccccs", "ccccss", "llllcc", "ppllll", "cccsss", "ppppss", "ppppss", "dppppl", "ddddpp", "dddppp",
-			"cddddp", "ddllll", "pllllc", "llllcc", "pppsss", "ppllll", "ppgggg", "ggcccc", "ssssll", "ccdddd",
-			"llllgg", "gpppps", "cczppp", "ddddpp", "llcccc", "lllggg", "ggggcc", "llll77", "ggggcc", "ppppcc",
-			"cssssl", "ppgggg", "ppssss", "ppplll", "ccczpp", "sllll7", "sssppp", "ggggll", "ccdddd", "gpppps",
-			"dppppl", "ggggpp", "ppgggg", "ddddll", "ddpppp", "ggggll", "cccsss", "dppppl", "ppppcc", "pggggl",
-			"llcccc", "cccsss", "ccccdd", "ggpppp", "gggppp", "ddpppp", "slllld", "ggcccc", "lgggg7", "ddddpp",
-			"ccssss", "llcccc", "ssszcc", "dddlll", "glllld", "ggpppp", "pllllc", "sssppp", "ccccss", "llgggg",
-			"lllggg", "lllggg", "sspppp", "sssccc", "ccccdd", "pppsss", "dppppg", "ggllll", "llllpp", "ccczpp",
-			"ggggll", "pssssl", "ddddll", "ccccss", "ppgggg", "ssllll", "pppsss", "pppccc", "cczppp", "cccsss",
-			"ggpppp", "ssslll", "gggppp", "ppgggg", "ggg777", "llgggg", "lllggg", "ssslll", "cddddp", "lllggg",
-			"pllllc", "7777pp", "pppggg", "lldddd", "czpppp", "ppppss", "cccddd", "sppppc", "sppppc", "lggggc",
-			"gggppp", "cccddd", "ppcccc", "ggpppp", "ppssss", "ppppcc", "ppppgg", "pppggg", "ppppss", "pppggg",
-			"ppssss", "ppssss", "lggggp", "ggpppp", "pppsss", "gccccz", "ssslll", "sppppg", "pllllc", "ccczpp",
-			"ppssss", "ppppll", "ccssss", "sssscc", "pssssz", "dddppp", "gccccz", "ppllll", "ccssss", "sssscc",
-			"lllddd", "sssscc", "ssssll", "gpppps", "gccccz", "lllldd", "ccssss", "sssspp", "ggpppp", "cssssp",
-			"pppsss", "pccccs", "l7777p", "pppsss", "ccccss", "lldddd", "sspppp", "pppggg", "ppplll", "pppddd",
-			"lllggg", "pppccc", "sspppp", "sspppp", "ssssll", "llllcc", "ccdddd", "ssssll", "cssssp", "dddppp",
-			"dppppg", "ssssll", "ddddpp", "cczppp", "pggggc", "ccdddd", "ppdddd", "sssscc", "ppppss", "cccddd",
-			"ccczpp", "ddllll", "ddpppp", "ccccdd", "sscccc", "ccssss", "ccccss", "pppsss", "pppggg", "ccdddd",
-			"lll777", "szcccc", "gg7777", "ssllll", "lllggg", "llgggg", "77pppp", "77777p", "ppppcc", "cssssl",
-			"cssssl", "ppcccc", "gggg77", "ddddpp", "dddlll", "ddddll", "lllccc", "ddddpp", "llgggg", "lggggc",
-			"szcccc", "sssspp", "ppppgg", "sspppp", "ggggpp", "77777p", "ppppss", "gggccc", "ppppss", "pppsss",
-			"pccccs", "lllppp", "lccccs", "ddddpp", "dllllg", "lccccs", "ddddll", "ccczpp", "ssssll", "ppppss",
-			"ccccdd", "lggggc", "lllppp", "ssslll", "llgggg", "cddddp", "ccssss", "ccssss", "cccddd", "ggggll",
-			"ggcccc", "llllgg", "pddddl", "lllggg", "ccssss", "ssllll", "ppgggg", "ssssll", "ccccdd", "ppppss",
-			"cccsss", "lpppps", "dddlll", "cccczp", "ssssll", "ppppdd", "ddddll", "ppppll", "llcccc", "ggggpp",
-			"llllcc", "lllggg", "dddppp", "pllllc", "lpppps", "dddppp", "ggggpp", "dddppp", "ppplll", "ssllll",
-			"ppdddd", "llll77", "lpppps", "ppgggg", "ggggcc", "7ppppd", "ccccss", "lddddp", "ggggll", "lllppp",
-			"ll7777", "lllddd", "ddddpp", "ddpppp", "sssscc", "pssssz", "ppssss", "dppppl", "cddddp", "ccccdd",
-			"dppppg", "ccssss", "ccccdd", "lldddd", "llcccc", "pggggl", "cccsss", "zccccd", "dddlll", "ppgggg",
-			"czpppp", "ppppdd", "ggggll", "ppllll", "dppppg", "ggglll", "gggppp", "ggllll", "lldddd", "ccccdd",
-			"ddddpp", "ppcccc", "cssssp", "ccccss", "77pppp", "llgggg", "lllldd", "sssscc", "ddddpp", "sscccc",
-			"sppppc", "pddddl", "pppddd", "ssslll", "lllddd", "lggggc", "dddppp", "ssssll", "ssslll", "ppgggg",
-			"llgggg", "ddllll", "dppppg", "lll777", "ssslll", "pppggg", "lddddp", "pddddl", "sssszc", "ddddpp",
-			"pppggg", "dllllg", "lllppp", "ggggcc", "sssppp", "sspppp", "ppgggg", "cccddd", "ppplll", "cccddd",
-			"lddddp", "pggggc", "sssscc", "sssppp", "ssssll", "cddddp", "llllgg", "pggggl", "777ppp", "ccccdd",
-			/* "lsssll", */ "ppllll", "ppcccc", "lgggpp", "ppppll", "szcccc", "ppppgg", "ppcccc", "ggggll", "pddddl",
-			"ppppcc", "ssslll", "zpppps", "lggggc", "plllcc", "dddppp", "sspppp", "ssllll", "ggpppp", "gpppps",
-			"llgggg", "gggppp", "zpppps", "ppllll", "ddllll", "lllddd", "pppggg", "szcccc", "ppppss", "lll777",
-			"ssslll", "czpppp", "ggglll", "pssssz", "llgggg", "ddddpp", "ppppll", "pppccc", "llgggg", "llgggg",
-			"lllldd", "plllld", "ggggll", "ccdddd", "pppggg", "dppppg", "ddllll", "llgggg", "gpppps", "ppppgg",
-			"ccssss", "ddpppp", "dddlll", "ssllll", "pssssl", "ccccss", "ppppgg", "llcccc", "ddddpp", "gggppp",
-			"lllldd", "pllllc", "ccdddd", "ggllll", "lldddd", "ppgggg", "cssssl", "ddpppp", "dddppp", "pllllc",
-			"pppsss", "szcccc", "lldddd", "lccccs", "lccccs", "ppdddd", "ccccss", "ppplll", "cccsss", "llpppp",
-			"gggccc", "dllllg", "ssslll", "scccss", "ccccss", "lllccc", "cccsss", "sspppp", "cddddp", "dllllg",
-			"lllppp", "dddlll", "llgggg", "dppppg", "sssspp", "sspppp", "lllccc", "sppppg", "sppppc", "lggggp",
-			"ddddll", "llllgg", "szcccc", "cssssl", "ggggpp", "ddddpp", "cccsss", "sllllg", "ddpppp", "ppppgg",
-			"ssslll", "dppppl", "dddlll", "llcccc", "sssppp", "pggggl", "ggggcc", "lll777", "glllld", "ccssss",
-			"dllllg", "pppggg", "zccccd", "ddddll", "cssssl", "ppplll", "ppppdd", "sssscc", "ccczpp", "ssslll",
-			"cccsss", "ppssss", "sllllp", "ppllll", "pllllc", "ppppcc", "ccczpp", "sssscc", "gpppps", "cccsss",
-			"lddddp", "ggllll", "glllld", "llllgg", "ppssss", "ggllll", "cddddl", "llcccc", "ddddpp", "ppssss",
-			"ppllll", "ccccdd", "ppppss", "gccccz", "gggccc", "ccdddd", "7777pp", "lllddd", "ssllll", "lllddd",
-			"ggggpp", "glllld", "cssssp", "pppddd", "cccddd", "ddddll", "ccdddd", "sscccc", "lllggg", "dppppl",
-			"ssslll", "dppppg", "ggglll", "ssslll", "pppggg", "gggppp", "pppggg", "gccccz", "gg7777", "sspppp",
-			"sssppp", "ppdddd", "sccccd", "ppplll", "ggpppp", "ggggll", "lllldd", "pccccd", "cccsss", "dddlll",
-			"gggppp", "czpppp", "g7777p", "ccccss", "cczppp", "gggg77", "ppppcc", "ssslll", "llgggg", "llcccc",
-			"pppsss", "sllll7", "ggggpp", "ddllll", "ssslll", "llgggg", "ggggpp", "lldddd", "llgggg", "ccccss",
-			"ppllll", "pccccs", "sllllp", "pccccs", "dppppl", "ppppdd", "7777pp", "sssppp", "sspppp", "llllpp",
-			"cccddd", "ppplll", "777ppp", "dppppl", "llgggg", "ddpppp", "ddddll", "lllggg", "cczppp", "dllllg",
-			"pssssc", "lllggg", "ssslll", "lllggg", "lllldd", "lpppps", "llllpp", "sssscc", "cddddp", "dddppp",
-			"ggpppp", "ppdddd", "ppgggg", "sssspp", "gpppps", "ppcccc", "ggpppp", "lllggg", "ppcccc", "czpppp",
-			"ppcccc", "cddddp", "ggllll", "ccssss", "lldddd", "ccssss", "gggg77", "ssslll", "cccsss", "sllllp",
-			"llgggg", "777ppp", "dddppp", "pppggg", "llpppp", "ssssll", "llcccc", "ssssll", "lllggg", "lllddd",
-			"ggggpp", "llcccc", "gccccs", "dddppp", "77pppp", "sppppc", "lccccs", "ggpppp", "llllcc", "lggggp",
-			"sssspp", "ggggcc", "cczppp", "cccsss", "ggg777", "pppsss", "ppssss", "ggcccc", "ppssss", "7777pp",
-			"ccssss", "lllccc", "ccllll", "ppppll", "ssslll", "ppppgg", "pccccs", "dppppg", "cddddl", "lgggg7",
-			"dppppl", "lllccc", "ppppss", "lccccs", "cccsss", "ddddpp", "cddddp", "777ppp", "ccccdd", "lccccs",
-			"dllllg", "ssslll", "llllcc", /* "c7777p", */ "ppcccc", "ppplll", "gggppp", "cssssp", "sssspp", "ppppll",
-			"ll7777", "cccsss", "pppsss", "ppppss", "ssslll", "sllllg", "pppsss", "llcccc", "ggggcc", "ssszcc",
-			"ssszcc", "ppppss", "ccccdd", "pppggg", "ddllll", "dppppg", "g7777p", "ssslll", "gggccc", "llgggg",
-			"lddddp", "cddddp", "ccdddd", "llllcc", "sssscc", "ccczpp", "ppcccc", "ddpppp", "dddppp", "gccccz",
-			"ppplll", "dddppp", "gggppp", "cccsss", "cddddp", "ggggpp", "sppppc", "lllggg", "ppllll", "llllcc",
-			"ppppll", "ppllll", "pssssc", "ddpppp", "ddpppp", "lllggg", "777ppp", "lllggg", "lddddp", "llllgg",
-			"pppsss", "ssssll", "gpppps", "llllgg", "ppppgg", "pllllc", "ddddpp", "zpppps", "ccssss", "ddddll",
-			"ssslll", "cczppp", "gggppp", "ssslll", "sscccc", "gccccs", "pggggl", "ggggll", "slllld", "pssssc",
-			"pggggl", "ccssss", "sssspp", "ggggcc", "sssspp", "lllccc", "ccccdd", "cccczp", "lldddd", "g7777p",
-			"ggcccc", "cccddd", "gccccs", "pppccc", "ssssll", "dddppp", "ppgggg", "lllldd", "dppppl", "slllld",
-			"sszccc", "ppppss", "77777p", "cccsss", "lllggg", "cssssp", "77pppp", "pccccs", "ppssss", "pssssl",
-			"sszccc", "7ppppd", "llcccc", "dppppl", "clllld", "cllllg", "cllllp", "c77777", "plllld", "pllllc",
-			"plllld", "pllllg", };
+	public static final String OBSERVATIONS[] = { "plll", "sccc", "ssss", "sppp", "pggg", "ssss", "ppps", "ppcc",
+			"pccc", "glll", "ppps", "cddd", "cccc", "ssll", "gggg", "psss", "llgg", "pppd", "lldd", "llpp", "slll",
+			"pppp", "ssll", "dppp", "zppp", "777p", "sssl", "llld", "pppg", "7777", "pppl", "llll", "csss", "dppp",
+			"ppgg", "lllp", "ppcc", "sspp", "gggc", "pppp", "cccs", "sscc", "ssss", "gccc", "pppl", "gggl", "ddpp",
+			"cccz", "7ppp", "pppp", "llll", "sspp", "cccs", "llll", "dddd", "gggg", "llcc", "llll", "ssss", "sspp",
+			"ccdd", "ddpp", "pppp", "ssll", "pppp", "ppss", "pggg", "7777", "dppp", "gggg", "llll", "ppss", "llll",
+			"cccc", "ssss", "pppl", "dddp", "cccc", "psss", "lggg", "ccss", "pddd", "ssss", "zppp", "777p", "lddd",
+			"lllc", "pppg", "7777", "llll", "pppl", "pppp", "pddd", "dppp", "lldd", "ggcc", "cccc", "cccc", "cccs",
+			"lllc", "plll", "ccss", "ppps", "ppps", "pppp", "dddp", "ddpp", "dddd", "dlll", "llll", "lllc", "ppss",
+			"plll", "pggg", "gccc", "sssl", "cddd", "lllg", "pppp", "czpp", "dddp", "lccc", "llgg", "gggc", "lll7",
+			"gggc", "pppc", "ssss", "pggg", "psss", "ppll", "cczp", "llll", "sspp", "gggl", "cddd", "pppp", "pppp",
+			"gggp", "pggg", "dddl", "dppp", "gggl", "ccss", "pppp", "pppc", "gggg", "lccc", "ccss", "cccd", "gppp",
+			"ggpp", "dppp", "llll", "gccc", "gggg", "dddp", "csss", "lccc", "sszc", "ddll", "llll", "gppp", "llll",
+			"sspp", "cccs", "lggg", "llgg", "llgg", "sppp", "sscc", "cccd", "ppss", "pppp", "glll", "lllp", "cczp",
+			"gggl", "ssss", "dddl", "cccs", "pggg", "slll", "ppss", "ppcc", "czpp", "ccss", "gppp", "ssll", "ggpp",
+			"pggg", "gg77", "lggg", "llgg", "ssll", "dddd", "llgg", "llll", "777p", "ppgg", "lddd", "zppp", "ppps",
+			"ccdd", "pppp", "pppp", "gggg", "ggpp", "ccdd", "pccc", "gppp", "psss", "pppc", "pppg", "ppgg", "ppps",
+			"ppgg", "psss", "psss", "gggg", "gppp", "ppss", "cccc", "ssll", "pppp", "llll", "cczp", "psss", "pppl",
+			"csss", "sssc", "ssss", "ddpp", "cccc", "plll", "csss", "sssc", "lldd", "sssc", "sssl", "pppp", "cccc",
+			"llld", "csss", "sssp", "gppp", "ssss", "ppss", "cccc", "7777", "ppss", "cccs", "lddd", "sppp", "ppgg",
+			"ppll", "ppdd", "llgg", "ppcc", "sppp", "sppp", "sssl", "lllc", "cddd", "sssl", "ssss", "ddpp", "pppp",
+			"sssl", "dddp", "czpp", "gggg", "cddd", "pddd", "sssc", "ppps", "ccdd", "cczp", "dlll", "dppp", "cccd",
+			"sccc", "csss", "cccs", "ppss", "ppgg", "cddd", "ll77", "zccc", "g777", "slll", "llgg", "lggg", "7ppp",
+			"7777", "pppc", "ssss", "ssss", "pccc", "ggg7", "dddp", "ddll", "dddl", "llcc", "dddp", "lggg", "gggg",
+			"zccc", "sssp", "pppg", "sppp", "gggp", "7777", "ppps", "ggcc", "ppps", "ppss", "cccc", "llpp", "cccc",
+			"dddp", "llll", "cccc", "dddl", "cczp", "sssl", "ppps", "cccd", "gggg", "llpp", "ssll", "lggg", "dddd",
+			"csss", "csss", "ccdd", "gggl", "gccc", "lllg", "dddd", "llgg", "csss", "slll", "pggg", "sssl", "cccd",
+			"ppps", "ccss", "pppp", "ddll", "cccz", "sssl", "pppd", "dddl", "pppl", "lccc", "gggp", "lllc", "llgg",
+			"ddpp", "llll", "pppp", "ddpp", "gggp", "ddpp", "ppll", "slll", "pddd", "lll7", "pppp", "pggg", "gggc",
+			"pppp", "cccs", "dddd", "gggl", "llpp", "l777", "lldd", "dddp", "dppp", "sssc", "ssss", "psss", "pppp",
+			"dddd", "cccd", "pppp", "csss", "cccd", "lddd", "lccc", "gggg", "ccss", "cccc", "ddll", "pggg", "zppp",
+			"pppd", "gggl", "plll", "pppp", "ggll", "ggpp", "glll", "lddd", "cccd", "dddp", "pccc", "ssss", "cccs",
+			"7ppp", "lggg", "llld", "sssc", "dddp", "sccc", "pppp", "dddd", "ppdd", "ssll", "lldd", "gggg", "ddpp",
+			"sssl", "ssll", "pggg", "lggg", "dlll", "pppp", "ll77", "ssll", "ppgg", "dddd", "dddd", "sssz", "dddp",
+			"ppgg", "llll", "llpp", "gggc", "sspp", "sppp", "pggg", "ccdd", "ppll", "ccdd", "dddd", "gggg", "sssc",
+			"sspp", "sssl", "dddd", "lllg", "gggg", "77pp", "cccd", "sssl", "plll", "pccc", "gggp", "pppl", "zccc",
+			"pppg", "pccc", "gggl", "dddd", "pppc", "ssll", "pppp", "gggg", "lllc", "ddpp", "sppp", "slll", "gppp",
+			"pppp", "lggg", "ggpp", "pppp", "plll", "dlll", "lldd", "ppgg", "zccc", "ppps", "ll77", "ssll", "zppp",
+			"ggll", "ssss", "lggg", "dddp", "pppl", "ppcc", "lggg", "lggg", "llld", "llll", "gggl", "cddd", "ppgg",
+			"pppp", "dlll", "lggg", "pppp", "pppg", "csss", "dppp", "ddll", "slll", "ssss", "cccs", "pppg", "lccc",
+			"dddp", "ggpp", "llld", "llll", "cddd", "glll", "lddd", "pggg", "ssss", "dppp", "ddpp", "llll", "ppss",
+			"zccc", "lddd", "cccc", "cccc", "pddd", "cccs", "ppll", "ccss", "lppp", "ggcc", "llll", "ssll", "cccs",
+			"cccs", "llcc", "ccss", "sppp", "dddd", "llll", "llpp", "ddll", "lggg", "pppp", "sssp", "sppp", "llcc",
+			"pppp", "pppp", "gggg", "dddl", "lllg", "zccc", "ssss", "gggp", "dddp", "ccss", "llll", "dppp", "pppg",
+			"ssll", "pppp", "ddll", "lccc", "sspp", "gggg", "gggc", "ll77", "llll", "csss", "llll", "ppgg", "cccc",
+			"dddl", "ssss", "ppll", "pppd", "sssc", "cczp", "ssll", "ccss", "psss", "llll", "plll", "llll", "pppc",
+			"cczp", "sssc", "pppp", "ccss", "dddd", "glll", "llll", "lllg", "psss", "glll", "dddd", "lccc", "dddp",
+			"psss", "plll", "cccd", "ppps", "cccc", "ggcc", "cddd", "777p", "lldd", "slll", "lldd", "gggp", "llll",
+			"ssss", "ppdd", "ccdd", "dddl", "cddd", "sccc", "llgg", "pppp", "ssll", "pppp", "ggll", "ssll", "ppgg",
+			"ggpp", "ppgg", "cccc", "g777", "sppp", "sspp", "pddd", "cccc", "ppll", "gppp", "gggl", "llld", "cccc",
+			"ccss", "ddll", "ggpp", "zppp", "7777", "cccs", "czpp", "ggg7", "pppc", "ssll", "lggg", "lccc", "ppss",
+			"llll", "gggp", "dlll", "ssll", "lggg", "gggp", "lddd", "lggg", "cccs", "plll", "cccc", "llll", "cccc",
+			"pppp", "pppd", "777p", "sspp", "sppp", "lllp", "ccdd", "ppll", "77pp", "pppp", "lggg", "dppp", "dddl",
+			"llgg", "czpp", "llll", "ssss", "llgg", "ssll", "llgg", "llld", "pppp", "lllp", "sssc", "dddd", "ddpp",
+			"gppp", "pddd", "pggg", "sssp", "pppp", "pccc", "gppp", "llgg", "pccc", "zppp", "pccc", "dddd", "glll",
+			"csss", "lddd", "csss", "ggg7", "ssll", "ccss", "llll", "lggg", "77pp", "ddpp", "ppgg", "lppp", "sssl",
+			"lccc", "sssl", "llgg", "lldd", "gggp", "lccc", "cccc", "ddpp", "7ppp", "pppp", "cccc", "gppp", "lllc",
+			"gggg", "sssp", "gggc", "czpp", "ccss", "gg77", "ppss", "psss", "gccc", "psss", "777p", "csss", "llcc",
+			"clll", "pppl", "ssll", "pppg", "cccc", "pppp", "dddd", "gggg", "pppp", "llcc", "ppps", "cccc", "ccss",
+			"dddp", "dddd", "77pp", "cccd", "cccc", "llll", "ssll", "lllc", "7777", "pccc", "ppll", "ggpp", "ssss",
+			"sssp", "pppl", "l777", "ccss", "ppss", "ppps", "ssll", "llll", "ppss", "lccc", "gggc", "sszc", "sszc",
+			"ppps", "cccd", "ppgg", "dlll", "pppp", "7777", "ssll", "ggcc", "lggg", "dddd", "dddd", "cddd", "lllc",
+			"sssc", "cczp", "pccc", "dppp", "ddpp", "cccc", "ppll", "ddpp", "ggpp", "ccss", "dddd", "gggp", "pppp",
+			"llgg", "plll", "lllc", "pppl", "plll", "ssss", "dppp", "dppp", "llgg", "77pp", "llgg", "dddd", "lllg",
+			"ppss", "sssl", "pppp", "lllg", "pppg", "llll", "dddp", "pppp", "csss", "dddl", "ssll", "czpp", "ggpp",
+			"ssll", "sccc", "cccc", "gggg", "gggl", "llll", "ssss", "gggg", "csss", "sssp", "gggc", "sssp", "llcc",
+			"cccd", "cccz", "lddd", "7777", "gccc", "ccdd", "cccc", "ppcc", "sssl", "ddpp", "pggg", "llld", "pppp",
+			"llll", "szcc", "ppps", "7777", "ccss", "llgg", "ssss", "7ppp", "cccc", "psss", "ssss", "szcc", "pppp",
+			"lccc", "pppp", };
 
 	/**
 	 * Slot machine screen observations.
@@ -118,23 +108,23 @@ public class Main {
 	/**
 	 * Reel start combination.
 	 */
-	private static final String REEL_START = "zccccdddd";
+	private static final String REEL_START = "cccz";
 
 	/**
 	 * Reel end combination.
 	 */
-	private static final String REEL_END = "ppppssssz";
+	private static final String REEL_END = "zppp";
 
 	/**
 	 * Combinations used as controls of the reel correctness.
 	 */
-	private static final String CONTROLS[] = { REEL_START, "ggggcccczppppssss", "llllgggg7777ppppdddd",
-			"sssllll7777ppppdddd", REEL_END };
+	private static final String CONTROLS[] = { REEL_START, "ggggcccczppppssss", "ppppsssszccccdddd",
+			"llllgggg7777ppppdddd", "sssllll7777ppppdddd", REEL_END };
 
 	/**
 	 * Minimal generated reel length.
 	 */
-	private static final int MIN_REEL_LENGTH = 80;
+	private static final int MIN_REEL_LENGTH = 50;
 
 	/**
 	 * Maximum generated reel length.
@@ -145,11 +135,6 @@ public class Main {
 	 * Combinations which are neighbors.
 	 */
 	private static final Map<String, Set<String>> NEIGHBORS = new HashMap<String, Set<String>>();
-
-	/**
-	 * Keep track of recursive levels.
-	 */
-	private static int recursiveLevel = 0;
 
 	/*
 	 * Initialization of the static variables.
@@ -176,19 +161,20 @@ public class Main {
 					continue;
 				}
 
+				/*
+				 * If the neighbor is already presented we do not count it.
+				 */
+				if (NEIGHBORS.get(observation).contains(neighbor) == true) {
+					continue;
+				}
+
 				// TODO Different criteria for neighbor can speed up
 				// calculations.
-
-				if (observation.endsWith(neighbor.substring(0, 5)) == true
-						&& NEIGHBORS.get(observation).contains(neighbor) == false) {
+				if (observation.endsWith(neighbor.substring(0, (OBSERVATION_SIZE - 1))) == true) {
 					NEIGHBORS.get(observation).add(neighbor);
 				}
 			}
 		}
-
-		/*
-		 * TODO Add 3 special pieces from the controls.
-		 */
 
 		/*
 		 * Calculate symbols frequencies.
@@ -231,7 +217,7 @@ public class Main {
 		 * Check all observed pieces to be presented.
 		 */
 		for (String piece : OBSERVATIONS) {
-			if (reel.contains(piece.substring(1, piece.length() - 1)) == false) {
+			if (reel.contains(piece) == false) {
 				return false;
 			}
 		}
@@ -250,112 +236,18 @@ public class Main {
 	 *         problem.
 	 */
 	private static String merge(String reel, String neighbor) {
-		for (int l = neighbor.length() - 1; l > 0; l--) {
+		/*
+		 * If current reel does not end with the current checked neighbor we do
+		 * nothing.
+		 */
+		if (reel.endsWith(neighbor.substring(0, neighbor.length() - OVERLAP_SIZE)) == true) {
 			/*
 			 * Merge end with part of the neighbor.
 			 */
-			if (reel.endsWith(neighbor.substring(0, l)) == true) {
-				String result = reel + neighbor.substring(l);
-
-				/*
-				 * Build reels only with valid pieces inside.
-				 */
-				if (NEIGHBORS.containsKey(reel.substring(reel.length() - 6)) == true) {
-					return result;
-				} else {
-					return reel;
-				}
-			}
+			return reel + neighbor.substring(neighbor.length() - OVERLAP_SIZE);
 		}
 
-		return "";
-	}
-
-	/**
-	 * Recursive function for reel generation.
-	 * 
-	 * @param reel
-	 *            Current state of the reel.
-	 */
-	private static void generate(String reel) {
-		/*
-		 * If the reel has desired end - finish generation process.
-		 */
-		if (reel.endsWith(REEL_END) == true) {
-			/*
-			 * Print only reels which are valid.
-			 */
-			if (valid(reel) == true) {
-				System.out.println("VALID:\t" + reel);
-			} else {
-				System.out.println("INVALID:\t" + reel);
-			}
-
-			return;
-		}
-
-		/*
-		 * If the reel is too big it is more like to be incorrect - finish
-		 * generation process.
-		 */
-		if (reel.length() > MAX_REEL_LENGTH) {
-			System.err.println("TOO LONG:\t" + reel);
-			return;
-		}
-
-		/*
-		 * List all neighbors and add it at the end.
-		 */
-		for (String neighbor : NEIGHBORS.get(reel.substring(reel.length() - 6))) {
-			/*
-			 * Some kind of calculation progress printing.
-			 */
-			if (recursiveLevel <= 9) {
-				System.err
-						.println("L" + recursiveLevel + "\t" + NEIGHBORS.get(reel.substring(reel.length() - 6)).size());
-			}
-
-			recursiveLevel++;
-			generate(merge(reel, neighbor));
-			recursiveLevel--;
-		}
-	}
-
-	/**
-	 * Generate reel on a stair based approach.
-	 * 
-	 * @param reel
-	 *            Current reel.
-	 */
-	private static void stairs(String reel) {
-		/*
-		 * Check for reel length.
-		 */
-		if (reel.endsWith(REEL_END) == true) {
-			if (valid(reel) == true) {
-				System.out.print("VALID:\t");
-			} else {
-				System.out.print("INVALID:\t");
-			}
-			System.out.println(reel);
-
-			return;
-		}
-
-		/*
-		 * Limit reel size.
-		 */
-		if (reel.length() > MAX_REEL_LENGTH) {
-			// System.err.println(reel);
-			return;
-		}
-
-		/*
-		 * Process ahead.
-		 */
-		for (String neighbor : NEIGHBORS.get(reel.substring(reel.length() - 6))) {
-			stairs(merge(reel, neighbor));
-		}
+		return reel;
 	}
 
 	/**
@@ -382,7 +274,7 @@ public class Main {
 			/*
 			 * List next possibilities.
 			 */
-			Object next[] = NEIGHBORS.get(reel.substring(reel.length() - 6)).toArray();
+			Object next[] = NEIGHBORS.get(reel.substring(reel.length() - OBSERVATION_SIZE)).toArray();
 
 			/*
 			 * There is no step ahead.
@@ -401,7 +293,7 @@ public class Main {
 				reel = merged;
 			}
 		} while (reel.length() < MAX_REEL_LENGTH);
-		// System.err.println(reel);
+		// System.out.println(reel);
 
 		return "";
 	}
@@ -448,7 +340,7 @@ public class Main {
 	 */
 	private static void monte() {
 		final long INTERVAL = 10000L;
-		final long EXPERIMENTS = 1000000L;
+		final long EXPERIMENTS = 100000000L;
 
 		System.out.println(NEIGHBORS);
 
@@ -481,11 +373,6 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		System.out.println("START");
-
-		// recursiveLevel = 1;
-		// generate(REEL_START);
-
-		// stairs(REEL_START);
 
 		monte();
 
