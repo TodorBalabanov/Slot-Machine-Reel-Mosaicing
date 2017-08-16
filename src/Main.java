@@ -19,68 +19,96 @@ public class Main {
 	/**
 	 * Slot machine screen observations.
 	 */
-	public static final String OBSERVATIONS[] = { "7777pp", "7777pp", "7777pp", "777ppp", "777ppp", "777ppp", "777ppp",
-			"777ppp", "777ppp", "777ppp", "777ppp", "777ppp", "77pppp", "77pppp", "77pppp", "77pppp", "7ppppc",
-			"7ppppc", "7ppppc", "7ppppc", "7ppppc", "7ppppc", "7ppppc", "ggggzl", "ggggzp", "ggggzp", "ggggzp",
-			"ggggzp", "ggggzp", "ggggzp", "ggggpp", "ggggpp", "ggggcc", "ggggcc", "ggggcc", "ggggcc", "gggzpp",
-			"gggzpp", "gggzpp", "gggzpp", "gggppp", "gggppp", "gggppp", "gggccc", "gggccc", "gggccc", "gggccc",
-			"gggccc", "ggzppp", "ggzppp", "ggzppp", "ggzppp", "ggzppp", "ggpppp", "ggcccc", "ggcccc", "ggcccc",
-			"ggcccc", "ggcccc", "gzpppp", "gzpppp", "gllllg", "gppppz", "gppppz", "gppppz", "gppppz", "gppppz",
-			"gppppz", "gppppz", "gccccs", "gccccs", "gccccs", "gccccs", "gccccs", "ddddll", "ddddll", "ddddll",
-			"ddddll", "ddddll", "ddddll", "ddddll", "ddddll", "ddddll", "ddddll", "ddddll", "ddddll", "dddlll",
-			"dddlll", "dddlll", "dddlll", "dddlll", "dddlll", "dddlll", "dddlll", "dddlll", "dddlll", "dddlll",
-			"dddlll", "dddlll", "dddlll", "dddlll", "ddllll", "ddllll", "ddllll", "ddllll", "ddllll", "ddllll",
-			"ddllll", "ddllll", "ddllll", "ddllll", "ddllll", "ddllll", "ddllll", "ddllll", "dllllg", "dllllg",
-			"dllllg", "dllllg", "dllllg", "dllllg", "dllllp", "dllllp", "dllllp", "dllllp", "dllllp", "dllllp",
-			"dllllp", "dllllp", "dlllls", "dlllls", "dlllls", "dlllls", "dlllls", "dlllls", "dlllls", "dlllls",
-			"zddddl", "zddddl", "zddddl", "zddddl", "zddddl", "zddddl", "zddddl", "zddddl", "zddddl", "zppppg",
-			"zppppg", "zppppg", "zppppg", "zppppg", "zppppg", "l7777p", "l7777p", "l7777p", "l7777p", "l7777p",
-			"l7777p", "l7777p", "l7777p", "lggggz", "lggggz", "lggggz", "lggggz", "lggggz", "lggggz", "lggggp",
-			"lggggp", "lggggp", "lggggp", "lggggp", "ll7777", "ll7777", "ll7777", "ll7777", "ll7777", "ll7777",
-			"ll7777", "ll7777", "llgggg", "llgggg", "llgggg", "llgggg", "llgggg", "llgggg", "lll777", "lll777",
-			"lll777", "lll777", "lll777", "lll777", "lll777", "lll777", "lll777", "lll777", "lll777", "lll777",
-			"lllggg", "lllggg", "lllggg", "lllggg", "lllggg", "lllggg", "lllggg", "lllggg", "lllggg", "lllggg",
-			"lllggg", "lllggg", "lllggg", "llll77", "llll77", "llll77", "llll77", "llll77", "llll77", "llllgg",
-			"llllgg", "llllgg", "llllgg", "llllgg", "llllgg", "llllgg", "llllgg", "llllgg", "llllgg", "llllgg",
-			"llllgg", "llllgg", "llllpp", "llllpp", "llllpp", "llllpp", "llllpp", "llllpp", "llllpp", "llllpp",
-			"llllpp", "llllpp", "llllpp", "llllpp", "llllpp", "llllpp", "llllpp", "llllss", "llllss", "llllss",
-			"llllss", "llllss", "llllss", "llllss", "lllppp", "lllppp", "lllppp", "lllppp", "lllppp", "lllppp",
-			"lllppp", "lllppp", "lllppp", "lllppp", "lllsss", "lllsss", "lllsss", "lllsss", "lllsss", "lllsss",
-			"lllsss", "lllsss", "lllsss", "lllsss", "llpppp", "llpppp", "llpppp", "llpppp", "llpppp", "llpppp",
-			"llpppp", "llpppp", "llpppp", "llpppp", "llpppp", "llpppp", "llpppp", "llpppp", "llpppp", "llssss",
-			"llssss", "llssss", "llssss", "llssss", "llssss", "lppppl", "lppppl", "lppppl", "lppppl", "lppppl",
-			"lpppps", "lpppps", "lpppps", "lpppps", "lpppps", "lpppps", "lpppps", "lssssl", "lssssl", "lssssl",
-			"lssssl", "lssssl", "pggggc", "pggggc", "pggggc", "pggggc", "pggggc", "pggggc", "pggggc", "pggggc",
-			"pzdddd", "pzdddd", "pzdddd", "pzdddd", "pzdddd", "pzdddd", "pzdddd", "pllll7", "pllll7", "pllll7",
-			"ppgggg", "ppgggg", "ppgggg", "ppgggg", "ppgggg", "ppzddd", "ppzddd", "ppzddd", "ppzddd", "ppzddd",
-			"ppzddd", "ppzddd", "ppllll", "ppllll", "ppllll", "ppllll", "ppllll", "pppggg", "pppggg", "pppggg",
-			"pppggg", "pppggg", "pppzdd", "pppzdd", "pppzdd", "pppzdd", "pppzdd", "pppzdd", "pppzdd", "pppzdd",
-			"ppplll", "ppplll", "ppplll", "ppplll", "ppplll", "ppppgg", "ppppgg", "ppppgg", "ppppzd", "ppppzd",
-			"ppppzd", "ppppzd", "ppppll", "ppppll", "ppppll", "ppppll", "ppppll", "ppppll", "ppppll", "ppppll",
-			"ppppss", "ppppss", "ppppss", "ppppss", "ppppcc", "ppppcc", "ppppcc", "ppppcc", "pppsss", "pppsss",
-			"pppsss", "pppsss", "pppsss", "pppsss", "pppsss", "pppsss", "pppccc", "pppccc", "pppccc", "pppccc",
-			"pppccc", "pppccc", "pppccc", "ppssss", "ppssss", "ppssss", "ppssss", "ppssss", "ppssss", "ppssss",
-			"ppssss", "ppssss", "ppssss", "ppssss", "ppssss", "ppssss", "ppssss", "ppcccc", "ppcccc", "ppcccc",
-			"ppcccc", "ppcccc", "ppcccc", "pssssc", "pssssc", "pccccs", "pccccs", "pccccs", "pccccs", "pccccs",
-			"pccccs", "pccccs", "pccccs", "pccccs", "sddddl", "sddddl", "sddddl", "sddddl", "sddddl", "sddddl",
-			"sddddl", "sddddl", "sddddl", "sddddl", "sddddl", "sddddl", "sddddl", "sddddl", "sllllp", "sllllp",
-			"sllllp", "sllllp", "sllllp", "sllllp", "ssdddd", "ssdddd", "ssdddd", "ssdddd", "ssdddd", "ssdddd",
-			"ssdddd", "ssdddd", "ssdddd", "ssdddd", "ssdddd", "ssdddd", "ssdddd", "ssdddd", "ssdddd", "ssllll",
-			"ssllll", "ssllll", "ssllll", "ssllll", "ssllll", "ssllll", "ssllll", "ssllll", "ssllll", "sssddd",
-			"sssddd", "sssddd", "sssddd", "sssddd", "sssddd", "sssddd", "sssddd", "sssddd", "sssddd", "sssddd",
-			"sssddd", "ssslll", "ssslll", "ssslll", "ssslll", "ssslll", "ssssdd", "ssssdd", "ssssdd", "ssssdd",
-			"ssssdd", "ssssdd", "ssssdd", "ssssdd", "ssssdd", "ssssdd", "ssssdd", "ssssdd", "ssssdd", "ssssdd",
-			"ssssdd", "ssssdd", "ssssdd", "ssssll", "ssssll", "ssssll", "ssssll", "ssssll", "ssssll", "ssssll",
-			"sssscc", "sssscc", "sssscc", "sssscc", "sssccc", "sssccc", "sssccc", "sssccc", "sssccc", "sssccc",
-			"sssccc", "sssccc", "sssccc", "sscccc", "sccccl", "sccccl", "sccccl", "sccccl", "cllllg", "cllllg",
-			"cllllg", "cllllg", "cllllg", "cssssd", "cssssd", "cssssd", "cssssd", "cssssd", "cssssd", "cssssd",
-			"cssssd", "cssssd", "cssssd", "cssssd", "cssssd", "cssssd", "ccllll", "ccllll", "ccllll", "ccssss",
-			"ccssss", "ccssss", "ccssss", "ccssss", "ccssss", "ccssss", "ccssss", "ccssss", "ccssss", "ccssss",
-			"ccssss", "ccssss", "ccclll", "ccclll", "ccclll", "ccclll", "cccsss", "cccsss", "cccsss", "cccsss",
-			"cccsss", "cccsss", "cccsss", "cccsss", "cccsss", "cccsss", "cccsss", "cccsss", "cccsss", "ccccll",
-			"ccccll", "ccccll", "ccccll", "ccccll", "ccccll", "ccccll", "ccccll", "ccccll", "ccccll", "ccccll",
-			"ccccll", "ccccss", "ccccss", "ccccss", "ccccss", "ccccss", "ccccss", "ccccss", "ccccss", "ccccss",
-			"ccccss", "ccccss", "ccccss", "ccccss", "ccccss", };
+	public static final String OBSERVATIONS[] = { "ppllll", "sscccc", "pssssz", "sspppp", "ppgggg", "cssssp", "ppppss",
+			"pppccc", "ppcccc", "ggllll", "ppppss", "ccdddd", "gccccz", "ssslll", "lggggc", "ppssss", "lllggg",
+			"ppppdd", "lllddd", "lllppp", "ssllll", "zpppps", "ssslll", "ddpppp", "czpppp", "7777pp", "ssssll",
+			"lllldd", "ppppgg", "77777p", "ppppll", "pllllc", "ccssss", "ddpppp", "pppggg", "llllpp", "pppccc",
+			"sssppp", "ggggcc", "zpppps", "ccccss", "sssccc", "pssssl", "ggcccc", "ppppll", "ggggll", "dddppp",
+			"cccczp", "77pppp", "dppppg", "glllld", "sssppp", "ccccss", "glllld", "pddddl", "pggggl", "lllccc",
+			"sllllg", "pssssc", "sssppp", "cccddd", "dddppp", "zpppps", "ssslll", "zpppps", "pppsss", "ppgggg",
+			"g7777p", "ddpppp", "lggggp", "sllll7", "pppsss", "slllld", "lccccs", "pssssz", "ppppll", "ddddpp",
+			"lccccs", "ppssss", "llgggg", "cccsss", "ppdddd", "pssssl", "czpppp", "7777pp", "lldddd", "llllcc",
+			"ppppgg", "77777p", "dllllg", "ppppll", "sppppg", "ppdddd", "ddpppp", "lllddd", "gggccc", "gccccz",
+			"lccccs", "ccccss", "llllcc", "ppllll", "cccsss", "ppppss", "ppppss", "dppppl", "ddddpp", "dddppp",
+			"cddddp", "ddllll", "pllllc", "llllcc", "pppsss", "ppllll", "ppgggg", "ggcccc", "ssssll", "ccdddd",
+			"llllgg", "gpppps", "cczppp", "ddddpp", "llcccc", "lllggg", "ggggcc", "llll77", "ggggcc", "ppppcc",
+			"cssssl", "ppgggg", "ppssss", "ppplll", "ccczpp", "sllll7", "sssppp", "ggggll", "ccdddd", "gpppps",
+			"dppppl", "ggggpp", "ppgggg", "ddddll", "ddpppp", "ggggll", "cccsss", "dppppl", "ppppcc", "pggggl",
+			"llcccc", "cccsss", "ccccdd", "ggpppp", "gggppp", "ddpppp", "slllld", "ggcccc", "lgggg7", "ddddpp",
+			"ccssss", "llcccc", "ssszcc", "dddlll", "glllld", "ggpppp", "pllllc", "sssppp", "ccccss", "llgggg",
+			"lllggg", "lllggg", "sspppp", "sssccc", "ccccdd", "pppsss", "dppppg", "ggllll", "llllpp", "ccczpp",
+			"ggggll", "pssssl", "ddddll", "ccccss", "ppgggg", "ssllll", "pppsss", "pppccc", "cczppp", "cccsss",
+			"ggpppp", "ssslll", "gggppp", "ppgggg", "ggg777", "llgggg", "lllggg", "ssslll", "cddddp", "lllggg",
+			"pllllc", "7777pp", "pppggg", "lldddd", "czpppp", "ppppss", "cccddd", "sppppc", "sppppc", "lggggc",
+			"gggppp", "cccddd", "ppcccc", "ggpppp", "ppssss", "ppppcc", "ppppgg", "pppggg", "ppppss", "pppggg",
+			"ppssss", "ppssss", "lggggp", "ggpppp", "pppsss", "gccccz", "ssslll", "sppppg", "pllllc", "ccczpp",
+			"ppssss", "ppppll", "ccssss", "sssscc", "pssssz", "dddppp", "gccccz", "ppllll", "ccssss", "sssscc",
+			"lllddd", "sssscc", "ssssll", "gpppps", "gccccz", "lllldd", "ccssss", "sssspp", "ggpppp", "cssssp",
+			"pppsss", "pccccs", "l7777p", "pppsss", "ccccss", "lldddd", "sspppp", "pppggg", "ppplll", "pppddd",
+			"lllggg", "pppccc", "sspppp", "sspppp", "ssssll", "llllcc", "ccdddd", "ssssll", "cssssp", "dddppp",
+			"dppppg", "ssssll", "ddddpp", "cczppp", "pggggc", "ccdddd", "ppdddd", "sssscc", "ppppss", "cccddd",
+			"ccczpp", "ddllll", "ddpppp", "ccccdd", "sscccc", "ccssss", "ccccss", "pppsss", "pppggg", "ccdddd",
+			"lll777", "szcccc", "gg7777", "ssllll", "lllggg", "llgggg", "77pppp", "77777p", "ppppcc", "cssssl",
+			"cssssl", "ppcccc", "gggg77", "ddddpp", "dddlll", "ddddll", "lllccc", "ddddpp", "llgggg", "lggggc",
+			"szcccc", "sssspp", "ppppgg", "sspppp", "ggggpp", "77777p", "ppppss", "gggccc", "ppppss", "pppsss",
+			"pccccs", "lllppp", "lccccs", "ddddpp", "dllllg", "lccccs", "ddddll", "ccczpp", "ssssll", "ppppss",
+			"ccccdd", "lggggc", "lllppp", "ssslll", "llgggg", "cddddp", "ccssss", "ccssss", "cccddd", "ggggll",
+			"ggcccc", "llllgg", "pddddl", "lllggg", "ccssss", "ssllll", "ppgggg", "ssssll", "ccccdd", "ppppss",
+			"cccsss", "lpppps", "dddlll", "cccczp", "ssssll", "ppppdd", "ddddll", "ppppll", "llcccc", "ggggpp",
+			"llllcc", "lllggg", "dddppp", "pllllc", "lpppps", "dddppp", "ggggpp", "dddppp", "ppplll", "ssllll",
+			"ppdddd", "llll77", "lpppps", "ppgggg", "ggggcc", "7ppppd", "ccccss", "lddddp", "ggggll", "lllppp",
+			"ll7777", "lllddd", "ddddpp", "ddpppp", "sssscc", "pssssz", "ppssss", "dppppl", "cddddp", "ccccdd",
+			"dppppg", "ccssss", "ccccdd", "lldddd", "llcccc", "pggggl", "cccsss", "zccccd", "dddlll", "ppgggg",
+			"czpppp", "ppppdd", "ggggll", "ppllll", "dppppg", "ggglll", "gggppp", "ggllll", "lldddd", "ccccdd",
+			"ddddpp", "ppcccc", "cssssp", "ccccss", "77pppp", "llgggg", "lllldd", "sssscc", "ddddpp", "sscccc",
+			"sppppc", "pddddl", "pppddd", "ssslll", "lllddd", "lggggc", "dddppp", "ssssll", "ssslll", "ppgggg",
+			"llgggg", "ddllll", "dppppg", "lll777", "ssslll", "pppggg", "lddddp", "pddddl", "sssszc", "ddddpp",
+			"pppggg", "dllllg", "lllppp", "ggggcc", "sssppp", "sspppp", "ppgggg", "cccddd", "ppplll", "cccddd",
+			"lddddp", "pggggc", "sssscc", "sssppp", "ssssll", "cddddp", "llllgg", "pggggl", "777ppp", "ccccdd",
+			/* "lsssll", */ "ppllll", "ppcccc", "lgggpp", "ppppll", "szcccc", "ppppgg", "ppcccc", "ggggll", "pddddl",
+			"ppppcc", "ssslll", "zpppps", "lggggc", "plllcc", "dddppp", "sspppp", "ssllll", "ggpppp", "gpppps",
+			"llgggg", "gggppp", "zpppps", "ppllll", "ddllll", "lllddd", "pppggg", "szcccc", "ppppss", "lll777",
+			"ssslll", "czpppp", "ggglll", "pssssz", "llgggg", "ddddpp", "ppppll", "pppccc", "llgggg", "llgggg",
+			"lllldd", "plllld", "ggggll", "ccdddd", "pppggg", "dppppg", "ddllll", "llgggg", "gpppps", "ppppgg",
+			"ccssss", "ddpppp", "dddlll", "ssllll", "pssssl", "ccccss", "ppppgg", "llcccc", "ddddpp", "gggppp",
+			"lllldd", "pllllc", "ccdddd", "ggllll", "lldddd", "ppgggg", "cssssl", "ddpppp", "dddppp", "pllllc",
+			"pppsss", "szcccc", "lldddd", "lccccs", "lccccs", "ppdddd", "ccccss", "ppplll", "cccsss", "llpppp",
+			"gggccc", "dllllg", "ssslll", "scccss", "ccccss", "lllccc", "cccsss", "sspppp", "cddddp", "dllllg",
+			"lllppp", "dddlll", "llgggg", "dppppg", "sssspp", "sspppp", "lllccc", "sppppg", "sppppc", "lggggp",
+			"ddddll", "llllgg", "szcccc", "cssssl", "ggggpp", "ddddpp", "cccsss", "sllllg", "ddpppp", "ppppgg",
+			"ssslll", "dppppl", "dddlll", "llcccc", "sssppp", "pggggl", "ggggcc", "lll777", "glllld", "ccssss",
+			"dllllg", "pppggg", "zccccd", "ddddll", "cssssl", "ppplll", "ppppdd", "sssscc", "ccczpp", "ssslll",
+			"cccsss", "ppssss", "sllllp", "ppllll", "pllllc", "ppppcc", "ccczpp", "sssscc", "gpppps", "cccsss",
+			"lddddp", "ggllll", "glllld", "llllgg", "ppssss", "ggllll", "cddddl", "llcccc", "ddddpp", "ppssss",
+			"ppllll", "ccccdd", "ppppss", "gccccz", "gggccc", "ccdddd", "7777pp", "lllddd", "ssllll", "lllddd",
+			"ggggpp", "glllld", "cssssp", "pppddd", "cccddd", "ddddll", "ccdddd", "sscccc", "lllggg", "dppppl",
+			"ssslll", "dppppg", "ggglll", "ssslll", "pppggg", "gggppp", "pppggg", "gccccz", "gg7777", "sspppp",
+			"sssppp", "ppdddd", "sccccd", "ppplll", "ggpppp", "ggggll", "lllldd", "pccccd", "cccsss", "dddlll",
+			"gggppp", "czpppp", "g7777p", "ccccss", "cczppp", "gggg77", "ppppcc", "ssslll", "llgggg", "llcccc",
+			"pppsss", "sllll7", "ggggpp", "ddllll", "ssslll", "llgggg", "ggggpp", "lldddd", "llgggg", "ccccss",
+			"ppllll", "pccccs", "sllllp", "pccccs", "dppppl", "ppppdd", "7777pp", "sssppp", "sspppp", "llllpp",
+			"cccddd", "ppplll", "777ppp", "dppppl", "llgggg", "ddpppp", "ddddll", "lllggg", "cczppp", "dllllg",
+			"pssssc", "lllggg", "ssslll", "lllggg", "lllldd", "lpppps", "llllpp", "sssscc", "cddddp", "dddppp",
+			"ggpppp", "ppdddd", "ppgggg", "sssspp", "gpppps", "ppcccc", "ggpppp", "lllggg", "ppcccc", "czpppp",
+			"ppcccc", "cddddp", "ggllll", "ccssss", "lldddd", "ccssss", "gggg77", "ssslll", "cccsss", "sllllp",
+			"llgggg", "777ppp", "dddppp", "pppggg", "llpppp", "ssssll", "llcccc", "ssssll", "lllggg", "lllddd",
+			"ggggpp", "llcccc", "gccccs", "dddppp", "77pppp", "sppppc", "lccccs", "ggpppp", "llllcc", "lggggp",
+			"sssspp", "ggggcc", "cczppp", "cccsss", "ggg777", "pppsss", "ppssss", "ggcccc", "ppssss", "7777pp",
+			"ccssss", "lllccc", "ccllll", "ppppll", "ssslll", "ppppgg", "pccccs", "dppppg", "cddddl", "lgggg7",
+			"dppppl", "lllccc", "ppppss", "lccccs", "cccsss", "ddddpp", "cddddp", "777ppp", "ccccdd", "lccccs",
+			"dllllg", "ssslll", "llllcc", /* "c7777p", */ "ppcccc", "ppplll", "gggppp", "cssssp", "sssspp", "ppppll",
+			"ll7777", "cccsss", "pppsss", "ppppss", "ssslll", "sllllg", "pppsss", "llcccc", "ggggcc", "ssszcc",
+			"ssszcc", "ppppss", "ccccdd", "pppggg", "ddllll", "dppppg", "g7777p", "ssslll", "gggccc", "llgggg",
+			"lddddp", "cddddp", "ccdddd", "llllcc", "sssscc", "ccczpp", "ppcccc", "ddpppp", "dddppp", "gccccz",
+			"ppplll", "dddppp", "gggppp", "cccsss", "cddddp", "ggggpp", "sppppc", "lllggg", "ppllll", "llllcc",
+			"ppppll", "ppllll", "pssssc", "ddpppp", "ddpppp", "lllggg", "777ppp", "lllggg", "lddddp", "llllgg",
+			"pppsss", "ssssll", "gpppps", "llllgg", "ppppgg", "pllllc", "ddddpp", "zpppps", "ccssss", "ddddll",
+			"ssslll", "cczppp", "gggppp", "ssslll", "sscccc", "gccccs", "pggggl", "ggggll", "slllld", "pssssc",
+			"pggggl", "ccssss", "sssspp", "ggggcc", "sssspp", "lllccc", "ccccdd", "cccczp", "lldddd", "g7777p",
+			"ggcccc", "cccddd", "gccccs", "pppccc", "ssssll", "dddppp", "ppgggg", "lllldd", "dppppl", "slllld",
+			"sszccc", "ppppss", "77777p", "cccsss", "lllggg", "cssssp", "77pppp", "pccccs", "ppssss", "pssssl",
+			"sszccc", "7ppppd", "llcccc", "dppppl", "clllld", "cllllg", "cllllp", "c77777", "plllld", "pllllc",
+			"plllld", "pllllg", };
 
 	/**
 	 * Slot machine screen observations.
@@ -90,18 +118,18 @@ public class Main {
 	/**
 	 * Reel start combination.
 	 */
-	private static final String REEL_START = "7777ppppccccssssddddllll";
+	private static final String REEL_START = "zccccdddd";
 
 	/**
 	 * Reel end combination.
 	 */
-	private static final String REEL_END = "llllppppllll7777";
+	private static final String REEL_END = "ppppssssz";
 
 	/**
 	 * Combinations used as controls of the reel correctness.
 	 */
-	private static final String CONTROLS[] = { REEL_START, "llllggggzppppggggccccssssddddllll", "llllggggppppzddddllll",
-			REEL_END };
+	private static final String CONTROLS[] = { REEL_START, "ggggcccczppppssss", "llllgggg7777ppppdddd",
+			"sssllll7777ppppdddd", REEL_END };
 
 	/**
 	 * Minimal generated reel length.
@@ -111,7 +139,7 @@ public class Main {
 	/**
 	 * Maximum generated reel length.
 	 */
-	private static final int MAX_REEL_LENGTH = 160;
+	private static final int MAX_REEL_LENGTH = 280;
 
 	/**
 	 * Combinations which are neighbors.
@@ -342,11 +370,12 @@ public class Main {
 			/*
 			 * End with positive result.
 			 */
-			if (reel.endsWith(REEL_END) == true) {
+			if (reel.endsWith(REEL_END) == true && reel.length() > MIN_REEL_LENGTH) {
 				if (valid(reel) == true) {
 					return reel;
 				}
 
+				// System.out.println(reel);
 				return "";
 			}
 
@@ -375,36 +404,6 @@ public class Main {
 		// System.err.println(reel);
 
 		return "";
-	}
-
-	/**
-	 * Connect two pieces in a single piece.
-	 * 
-	 * @param left
-	 *            Piece from the left side.
-	 * @param right
-	 *            Piece from the right side.
-	 * @return Single connected piece.
-	 */
-	private static String connect(String left, String right) {
-		return "";
-	}
-
-	/**
-	 * Array with pieces which should be connected between each other.
-	 * 
-	 * @param pieces
-	 *            Array of pieces.
-	 * @return Single connected string.
-	 */
-	private static String reconnect(String[] pieces) {
-		String result = "";
-
-		for (int i = 0; i < pieces.length - 1; i++) {
-			connect(pieces[i], pieces[i + 1]);
-		}
-
-		return result;
 	}
 
 	/**
@@ -449,7 +448,9 @@ public class Main {
 	 */
 	private static void monte() {
 		final long INTERVAL = 10000L;
-		final long EXPERIMENTS = 100000000L;
+		final long EXPERIMENTS = 1000000L;
+
+		System.out.println(NEIGHBORS);
 
 		/*
 		 * Solutions generation.
@@ -487,13 +488,6 @@ public class Main {
 		// stairs(REEL_START);
 
 		monte();
-
-		// reconnect(new String[] { "7777ppppccccssssdddd", "llllggggppppzdddd",
-		// "llllggggzppppggggccccssssdddd",
-		// "llllppppllll7777" });
-		// reconnect(new String[] { "7777ppppccccssssddddllll",
-		// "ggggzppppggggccccssssdddd", "llllggggppppzddddllll",
-		// "ppppllll7777" });
 
 		System.out.println("FINISH");
 	}
