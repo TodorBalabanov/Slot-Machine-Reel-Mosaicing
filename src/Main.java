@@ -23,11 +23,6 @@ public class Main {
 	private static final int OBSERVATION_SIZE = 4;
 
 	/**
-	 * Size of the observed reel.
-	 */
-	private static final int OVERLAP_SIZE = 1;
-
-	/**
 	 * Slot machine screen observations.
 	 */
 	public static final String OBSERVATIONS[] = { "plll", "sccc", "ssss", "sppp", "pggg", "ssss", "ppps", "ppcc",
@@ -129,7 +124,7 @@ public class Main {
 	/**
 	 * Maximum generated reel length.
 	 */
-	private static final int MAX_REEL_LENGTH = 280;
+	private static final int MAX_REEL_LENGTH = 180;
 
 	/**
 	 * Combinations which are neighbors.
@@ -142,8 +137,7 @@ public class Main {
 	static {
 		for (String observation : OBSERVATIONS) {
 			/*
-			 * Each combination should be presented only once in the neighbor
-			 * matrix.
+			 * Each combination should be presented only once in the neighbor matrix.
 			 */
 			if (NEIGHBORS.containsKey(observation)) {
 				continue;
@@ -170,7 +164,17 @@ public class Main {
 
 				// TODO Different criteria for neighbor can speed up
 				// calculations.
-				if (observation.endsWith(neighbor.substring(0, (OBSERVATION_SIZE - 1))) == true) {
+				for (int size = OBSERVATION_SIZE - 1; size > 0; size--) {
+					/*
+					 * Check overlapping with different sizes.
+					 */
+					if (observation.endsWith(neighbor.substring(0, size)) == false) {
+						continue;
+					}
+
+					/*
+					 * Keep only valid overlapping.
+					 */
 					NEIGHBORS.get(observation).add(neighbor);
 				}
 			}
@@ -232,21 +236,29 @@ public class Main {
 	 *            Current reel.
 	 * @param neighbor
 	 *            One of the neighbors.
-	 * @return Reel merged with the neighbor or empty string if there is a
-	 *         problem.
+	 * @return Reel merged with the neighbor or empty string if there is a problem.
 	 */
 	private static String merge(String reel, String neighbor) {
 		/*
-		 * If current reel does not end with the current checked neighbor we do
-		 * nothing.
+		 * Check different overlap sizes.
 		 */
-		if (reel.endsWith(neighbor.substring(0, neighbor.length() - OVERLAP_SIZE)) == true) {
+		for (int overlap = neighbor.length() - 1; overlap > 0; overlap--) {
+			/*
+			 * If current reel does not end with the current checked neighbor we do nothing.
+			 */
+			if (reel.endsWith(neighbor.substring(0, neighbor.length() - overlap)) == false) {
+				continue;
+			}
+
 			/*
 			 * Merge end with part of the neighbor.
 			 */
-			return reel + neighbor.substring(neighbor.length() - OVERLAP_SIZE);
+			return reel + neighbor.substring(neighbor.length() - overlap);
 		}
 
+		/*
+		 * Return the reel itself if the merge is not possible.
+		 */
 		return reel;
 	}
 
@@ -299,8 +311,8 @@ public class Main {
 	}
 
 	/**
-	 * Euclidean distance between reel symbols frequencies and observation
-	 * symbols frequencies.
+	 * Euclidean distance between reel symbols frequencies and observation symbols
+	 * frequencies.
 	 * 
 	 * @param reel
 	 *            Generated reel.
