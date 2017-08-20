@@ -348,13 +348,11 @@ public class Main {
 	}
 
 	/**
-	 * Monte-Carlo Search based reel reconstruction.
+	 * Monte-Carlo search based reel reconstruction.
 	 */
 	private static void monte() {
 		final long INTERVAL = 10000L;
-		final long EXPERIMENTS = 100000000L;
-
-		System.out.println(NEIGHBORS);
+		final long EXPERIMENTS = 10000000L;
 
 		/*
 		 * Solutions generation.
@@ -385,6 +383,8 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		System.out.println("START");
+
+		System.out.println(NEIGHBORS);
 
 		monte();
 
