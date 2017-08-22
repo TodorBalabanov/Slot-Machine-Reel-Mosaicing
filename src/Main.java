@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -25,7 +26,7 @@ public class Main {
 	/**
 	 * Slot machine screen observations.
 	 */
-	public static final Set<String> OBSERVATIONS = new HashSet<String>(Arrays.asList(new String[] {
+	public static final List<String> OBSERVATIONS = Arrays.asList(new String[] {
 
 			"llll", "ppzs", "llss", "ppzs", "cggg", "ppll", "gppp", "ppll", "cddd", "pppc", "cccc", "ppzs", "dlll",
 			"ccgg", "cccg", "pppp", "dddd", "pzcc", "llll", "ppzc", "cccg", "ddll", "ppss", "cccg", "cddd", "pppz",
@@ -35,7 +36,7 @@ public class Main {
 			"ggpp", "gggg", "llll", "cccc", "cccc", "pppp", "pzss", "cccc", "pzss", "dsss", "ppzs", "dddd", "cccg",
 			"ssss", "sssl", "pppc", "ppcc", "gggg", "dddd", "ggpp", "gggp", "ppll", "pzcc", "gggg", "llll", "dd77",
 			"7777", "cddd", "llpp", "cddd", "cddd", "lllc", "lppp", "sccc", "ddds", "ggpp", "pzcc", "d777", "77ll",
-			"gppp", "pppp", "ccgg", "zccc", "llll", "gggp", "sppp", "pppp", "ppzc", "pppz", "ppzs", "ppzz", "llpp",
+			"gppp", "pppp", "ccgg", "zccc", "llll", "gggp", "sppp", "pppp", "ppzc", "pppz", "ppzs", "ppzs", "llpp",
 			"gggp", "gggp", "ddss", "cccg", "ccgg", "pppp", "ccgg", "zsss", "7lll", "ddss", "lddd", "pppp", "zccc",
 			"pppp", "lddd", "pppp", "ddd7", "gppp", "dddl", "ppcc", "cccg", "lddd", "cccg", "dddl", "cccc", "llpp",
 			"pppp", "psss", "plll", "ddll", "lccc", "gggg", "ccgg", "zccc", "dlll", "pccc", "llcc", "ppss", "ssll",
@@ -96,7 +97,7 @@ public class Main {
 			"cggg", "gggg", "sssc", "cccd", "gppp", "ddds", "cccd", "cddd", "ssll", "ddd7", "pppz", "ccdd", "pccc",
 			"ccgg", "cccg", "ppss", "llll", "7777", "pzss", "gppp", "lllp", "sspp",
 
-	}));
+	});
 
 	/**
 	 * Slot machine screen observations.
@@ -139,7 +140,8 @@ public class Main {
 	static {
 		for (String observation : OBSERVATIONS) {
 			/*
-			 * Each combination should be presented only once in the neighbor matrix.
+			 * Each combination should be presented only once in the neighbor
+			 * matrix.
 			 */
 			if (NEIGHBORS.containsKey(observation)) {
 				continue;
@@ -166,7 +168,7 @@ public class Main {
 
 				// TODO Different criteria for neighbor can speed up
 				// calculations.
-				for (int size = OBSERVATION_SIZE - 1; size > 0; size--) {
+				for (int size = OBSERVATION_SIZE - 1; size >= 1; size--) {
 					/*
 					 * Check overlapping with different sizes.
 					 */
@@ -203,11 +205,41 @@ public class Main {
 	}
 
 	/**
+	 * Check reel for having at least some of the observations.
+	 * 
+	 * @param reel
+	 *            Generate reel.
+	 * @return True if it is a partial valid reel, false otherwise.
+	 */
+	private static boolean partialValid(String reel) {
+		/*
+		 * Check only unique observations.
+		 */
+		Set<String> unique = NEIGHBORS.keySet();
+
+		/*
+		 * Size of the reel checked part.
+		 */
+		int size = (reel.length() / OBSERVATION_SIZE) * OBSERVATION_SIZE;
+
+		/*
+		 * Group parts according observation size.
+		 */
+		for (int i = 0, j = OBSERVATION_SIZE; j < size; i++, j++) {
+			if (unique.contains(reel.substring(i, j)) == false) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Check reel for having at least one of the observations.
 	 * 
 	 * @param reel
 	 *            Generate reel.
-	 * @return True if it is a valid reel, false otherwise.
+	 * @return Array with all wrong segments.
 	 */
 	private static String[] wrongSegments(String reel) {
 		Set<String> wrong = new HashSet<String>();
@@ -216,7 +248,7 @@ public class Main {
 		 * At least one observed pieces to be presented at the end.
 		 */
 		for (int i = 0; i < reel.length() - OBSERVATION_SIZE + 1; i++) {
-			if (OBSERVATIONS.contains(reel.substring(i, i + OBSERVATION_SIZE)) == false) {
+			if (NEIGHBORS.keySet().contains(reel.substring(i, i + OBSERVATION_SIZE)) == false) {
 				wrong.add(reel.substring(i, i + OBSERVATION_SIZE));
 			}
 		}
@@ -249,7 +281,7 @@ public class Main {
 		/*
 		 * Check all observed pieces to be presented.
 		 */
-		for (String piece : OBSERVATIONS) {
+		for (String piece : NEIGHBORS.keySet()) {
 			if (reel.contains(piece) == false) {
 				missing.add(piece);
 			}
@@ -268,7 +300,8 @@ public class Main {
 	 *            Current reel.
 	 * @param neighbor
 	 *            One of the neighbors.
-	 * @return Reel merged with the neighbor or empty string if there is a problem.
+	 * @return Reel merged with the neighbor or empty string if there is a
+	 *         problem.
 	 */
 	private static String merge(String reel, String neighbor) {
 		/*
@@ -276,7 +309,8 @@ public class Main {
 		 */
 		for (int overlap = neighbor.length() - 1; overlap > 0; overlap--) {
 			/*
-			 * If current reel does not end with the current checked neighbor we do nothing.
+			 * If current reel does not end with the current checked neighbor we
+			 * do nothing.
 			 */
 			if (reel.endsWith(neighbor.substring(0, neighbor.length() - overlap)) == false) {
 				continue;
@@ -333,8 +367,8 @@ public class Main {
 	}
 
 	/**
-	 * Euclidean distance between reel symbols frequencies and observation symbols
-	 * frequencies.
+	 * Euclidean distance between reel symbols frequencies and observation
+	 * symbols frequencies.
 	 * 
 	 * @param reel
 	 *            Generated reel.
@@ -374,7 +408,7 @@ public class Main {
 	 */
 	private static void monte() {
 		final long INTERVAL = 10000L;
-		final long EXPERIMENTS = 1000000L;
+		final long EXPERIMENTS = 10000000L;
 
 		/*
 		 * Solutions generation.
@@ -393,9 +427,20 @@ public class Main {
 		 * Print solutions with frequencies distance.
 		 */
 		for (String solution : solutions) {
-			System.out.println(wrongSegments(solution).length + "\t" + missingObservations(solution).length + "\t"
-					+ distance(solution) + "\t" + solution.length() + "\t" + solution + "\t"
-					+ Arrays.toString(wrongSegments(solution)) + "\t" + Arrays.toString(missingObservations(solution)));
+			String[] wrong = wrongSegments(solution);
+			String[] missing = missingObservations(solution);
+
+			if (wrong.length > 10) {
+				continue;
+			}
+
+			if (missing.length > 10) {
+				continue;
+			}
+
+			System.out
+					.println(wrong.length + "\t" + missing.length + "\t" + distance(solution) + "\t" + solution.length()
+							+ "\t" + solution + "\t" + Arrays.toString(wrong) + "\t" + Arrays.toString(missing));
 		}
 	}
 
