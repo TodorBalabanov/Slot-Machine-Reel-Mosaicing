@@ -1,7 +1,6 @@
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -26,7 +25,7 @@ public class Main {
 	/**
 	 * Slot machine screen observations.
 	 */
-	public static final Set<String> OBSERVATIONS = new LinkedHashSet<String>(Arrays.asList(new String[] {
+	public static final Set<String> OBSERVATIONS = new HashSet<String>(Arrays.asList(new String[] {
 
 			"llll", "ppzs", "llss", "ppzs", "cggg", "ppll", "gppp", "ppll", "cddd", "pppc", "cccc", "ppzs", "dlll",
 			"ccgg", "cccg", "pppp", "dddd", "pzcc", "llll", "ppzc", "cccg", "ddll", "ppss", "cccg", "cddd", "pppz",
@@ -204,13 +203,33 @@ public class Main {
 	}
 
 	/**
-	 * Check reel for having controlling combinations.
+	 * Check reel for having at least one of the observations at the end.
 	 * 
 	 * @param reel
 	 *            Generate reel.
-	 * @return True if it is a valid reel, false otherwise.
+	 * @return True if it is a valid reel end, false otherwise.
 	 */
-	private static int valid(String reel) {
+	private static boolean isValidEnd(String reel) {
+		/*
+		 * At least one observed pieces to be presented at the end.
+		 */
+		for (String piece : OBSERVATIONS) {
+			if (reel.endsWith(piece) == true) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Check reel for having controlling combinations and all observations.
+	 * 
+	 * @param reel
+	 *            Generate reel.
+	 * @return Number of patterns which are not found in the reel.
+	 */
+	private static int validity(String reel) {
 		int counter = CONTROLS.length + OBSERVATIONS.size();
 
 		/*
@@ -280,7 +299,7 @@ public class Main {
 			 * End with positive result.
 			 */
 			if (reel.endsWith(REEL_END) == true && reel.length() > MIN_REEL_LENGTH) {
-				int missing = valid(reel);
+				int missing = validity(reel);
 				// System.out.println(missing + "\t" + reel);
 				return new Object[] { missing, reel };
 			}
@@ -301,9 +320,7 @@ public class Main {
 			 * Step ahead in the generation process.
 			 */
 			String merged = merge(reel, (String) next[PRNG.nextInt(next.length)]);
-			if (merged.equals(reel) || merged.equals("")) {
-				break;
-			} else {
+			if (isValidEnd(merged) == true) {
 				reel = merged;
 			}
 		} while (reel.length() < MAX_REEL_LENGTH);
@@ -354,7 +371,7 @@ public class Main {
 	 */
 	private static void monte() {
 		final long INTERVAL = 10000L;
-		final long EXPERIMENTS = 100000000L;
+		final long EXPERIMENTS = 10000000L;
 
 		/*
 		 * Solutions generation.
@@ -373,8 +390,8 @@ public class Main {
 		 * Print solutions with frequencies distance.
 		 */
 		for (String solution : solutions) {
-			System.out
-					.println(valid(solution) + "\t" + distance(solution) + "\t" + solution.length() + "\t" + solution);
+			System.out.println(
+					validity(solution) + "\t" + distance(solution) + "\t" + solution.length() + "\t" + solution);
 		}
 	}
 
@@ -386,7 +403,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		System.out.println("START");
-
+		
 		System.out.println(OBSERVATIONS);
 		System.out.println(NEIGHBORS);
 
