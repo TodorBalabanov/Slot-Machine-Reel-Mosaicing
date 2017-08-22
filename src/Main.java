@@ -121,7 +121,7 @@ public class Main {
 	/**
 	 * Minimal generated reel length.
 	 */
-	private static final int MIN_REEL_LENGTH = 30;
+	private static final int MIN_REEL_LENGTH = 60;
 
 	/**
 	 * Maximum generated reel length.
@@ -203,23 +203,28 @@ public class Main {
 	}
 
 	/**
-	 * Check reel for having at least one of the observations at the end.
+	 * Check reel for having at least one of the observations.
 	 * 
 	 * @param reel
 	 *            Generate reel.
-	 * @return True if it is a valid reel end, false otherwise.
+	 * @return True if it is a valid reel, false otherwise.
 	 */
-	private static boolean isValidEnd(String reel) {
+	private static String[] wrongSegments(String reel) {
+		Set<String> wrong = new HashSet<String>();
+
 		/*
 		 * At least one observed pieces to be presented at the end.
 		 */
-		for (String piece : OBSERVATIONS) {
-			if (reel.endsWith(piece) == true) {
-				return true;
+		for (int i = 0; i < reel.length() - OBSERVATION_SIZE + 1; i++) {
+			if (OBSERVATIONS.contains(reel.substring(i, i + OBSERVATION_SIZE)) == false) {
+				wrong.add(reel.substring(i, i + OBSERVATION_SIZE));
 			}
 		}
 
-		return false;
+		String result[] = new String[wrong.size()];
+		wrong.toArray(result);
+		Arrays.sort(result);
+		return result;
 	}
 
 	/**
@@ -229,15 +234,15 @@ public class Main {
 	 *            Generate reel.
 	 * @return Number of patterns which are not found in the reel.
 	 */
-	private static int validity(String reel) {
-		int counter = CONTROLS.length + OBSERVATIONS.size();
+	private static String[] missingObservations(String reel) {
+		Set<String> missing = new HashSet<String>();
 
 		/*
 		 * Check control pieces to be presented.
 		 */
 		for (String control : CONTROLS) {
 			if (reel.contains(control) == false) {
-				counter--;
+				missing.add(control);
 			}
 		}
 
@@ -246,11 +251,14 @@ public class Main {
 		 */
 		for (String piece : OBSERVATIONS) {
 			if (reel.contains(piece) == false) {
-				counter--;
+				missing.add(piece);
 			}
 		}
 
-		return counter;
+		String result[] = new String[missing.size()];
+		missing.toArray(result);
+		Arrays.sort(result);
+		return result;
 	}
 
 	/**
@@ -293,15 +301,13 @@ public class Main {
 	 *            Current reel.
 	 * @return Generated reel of empty string if it is not a valid reel.
 	 */
-	private static Object[] monteCarloStairs(String reel) {
+	private static String monteCarloStairs(String reel) {
 		do {
 			/*
 			 * End with positive result.
 			 */
 			if (reel.endsWith(REEL_END) == true && reel.length() > MIN_REEL_LENGTH) {
-				int missing = validity(reel);
-				// System.out.println(missing + "\t" + reel);
-				return new Object[] { missing, reel };
+				return reel;
 			}
 
 			/*
@@ -319,14 +325,11 @@ public class Main {
 			/*
 			 * Step ahead in the generation process.
 			 */
-			String merged = merge(reel, (String) next[PRNG.nextInt(next.length)]);
-			if (isValidEnd(merged) == true) {
-				reel = merged;
-			}
+			reel = merge(reel, (String) next[PRNG.nextInt(next.length)]);
 		} while (reel.length() < MAX_REEL_LENGTH);
 		// System.out.println(reel);
 
-		return new Object[] { 0, "" };
+		return "";
 	}
 
 	/**
@@ -371,7 +374,7 @@ public class Main {
 	 */
 	private static void monte() {
 		final long INTERVAL = 10000L;
-		final long EXPERIMENTS = 10000000L;
+		final long EXPERIMENTS = 1000000L;
 
 		/*
 		 * Solutions generation.
@@ -383,15 +386,16 @@ public class Main {
 				System.err.println(String.format("%5.2f", (100D * g / EXPERIMENTS)) + "%");
 			}
 
-			solutions.add((String) monteCarloStairs(REEL_START)[1]);
+			solutions.add((String) monteCarloStairs(REEL_START));
 		}
 
 		/*
 		 * Print solutions with frequencies distance.
 		 */
 		for (String solution : solutions) {
-			System.out.println(
-					validity(solution) + "\t" + distance(solution) + "\t" + solution.length() + "\t" + solution);
+			System.out.println(wrongSegments(solution).length + "\t" + missingObservations(solution).length + "\t"
+					+ distance(solution) + "\t" + solution.length() + "\t" + solution + "\t"
+					+ Arrays.toString(wrongSegments(solution)) + "\t" + Arrays.toString(missingObservations(solution)));
 		}
 	}
 
@@ -403,7 +407,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		System.out.println("START");
-		
+
 		System.out.println(OBSERVATIONS);
 		System.out.println(NEIGHBORS);
 
