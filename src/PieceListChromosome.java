@@ -11,6 +11,11 @@ import org.apache.commons.math3.genetics.InvalidRepresentationException;
 class PieceListChromosome extends AbstractListChromosome<String> {
 
 	/**
+	 * Reel info reference.
+	 */
+	private static Reel model = null;
+
+	/**
 	 * Constructor with array representation of the chromosome.
 	 * 
 	 * @param representation
@@ -19,7 +24,21 @@ class PieceListChromosome extends AbstractListChromosome<String> {
 	 * @throws InvalidRepresentationException
 	 *             If the representation is an invalid chromosome.
 	 */
-	public PieceListChromosome(String[] representation) throws InvalidRepresentationException {
+	PieceListChromosome(Reel model, String[] representation) throws InvalidRepresentationException {
+		super(representation);
+		PieceListChromosome.model = model;
+	}
+
+	/**
+	 * Constructor with array representation of the chromosome.
+	 * 
+	 * @param representation
+	 *            Chromosome as array of values.
+	 * 
+	 * @throws InvalidRepresentationException
+	 *             If the representation is an invalid chromosome.
+	 */
+	protected PieceListChromosome(String[] representation) throws InvalidRepresentationException {
 		super(representation);
 	}
 
@@ -31,7 +50,7 @@ class PieceListChromosome extends AbstractListChromosome<String> {
 	 * @param copy
 	 *            Deep copy flag.
 	 */
-	public PieceListChromosome(List<String> representation, boolean copy) {
+	protected PieceListChromosome(List<String> representation, boolean copy) {
 		super(representation, copy);
 	}
 
@@ -44,25 +63,39 @@ class PieceListChromosome extends AbstractListChromosome<String> {
 	 * @throws InvalidRepresentationException
 	 *             If the representation is an invalid chromosome.
 	 */
-	public PieceListChromosome(List<String> representation) throws InvalidRepresentationException {
+	protected PieceListChromosome(List<String> representation) throws InvalidRepresentationException {
 		super(representation);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public double fitness() {
-		// TODO Auto-generated method stub
-		return 0;
+		List<String> list = getRepresentation();
+		String array[] = new String[list.size()];
+		list.toArray(array);
+
+		double values[] = model.evaluate(array);
+		return 0 - values[0] - values[1] - values[2] - values[3];
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void checkValidity(List<String> representation) throws InvalidRepresentationException {
-		// TODO Auto-generated method stub
+		/*
+		 * Accept all as valid.
+		 */
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public AbstractListChromosome<String> newFixedLengthChromosome(List<String> representation) {
-		// TODO Auto-generated method stub
-		return null;
+		return new PieceListChromosome(representation, true);
 	}
 
 }

@@ -12,7 +12,7 @@ class MonteCarlo {
 	/**
 	 * Reel info reference.
 	 */
-	private Reel model = null;
+	private static Reel model = null;
 
 	/**
 	 * Constructor with all parameters.
@@ -21,7 +21,7 @@ class MonteCarlo {
 	 *            Reel info reference.
 	 */
 	MonteCarlo(Reel model) {
-		this.model = model;
+		MonteCarlo.model = model;
 	}
 
 	/**
@@ -113,6 +113,7 @@ class MonteCarlo {
 
 			result += wrong.length + "\t" + missing.length + "\t" + model.distance(solution) + "\t" + solution.length()
 					+ "\t" + solution + "\t" + Arrays.toString(wrong) + "\t" + Arrays.toString(missing);
+			result += "\r\n";
 		}
 
 		return result;

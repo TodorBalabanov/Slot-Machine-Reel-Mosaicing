@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -165,7 +167,7 @@ class Reel {
 	 *            Generate reel.
 	 * @return True if it is a partial valid reel, false otherwise.
 	 */
-	private boolean partialValid(String reel) {
+	boolean partialValid(String reel) {
 		/*
 		 * Check only unique observations.
 		 */
@@ -317,31 +319,107 @@ class Reel {
 		return Math.sqrt(distance);
 	}
 
+	/**
+	 * Generated reel minimum size getter.
+	 * 
+	 * @return Minimum size.
+	 */
 	public int min() {
 		return min;
 	}
 
+	/**
+	 * Generated reel maximum size getter.
+	 * 
+	 * @return Maximum size.
+	 */
 	public int max() {
 		return max;
 	}
 
+	/**
+	 * Observations getter.
+	 * 
+	 * @return List of all available observations.
+	 */
 	public List<String> observations() {
 		return observations;
 	}
 
+	/**
+	 * Neighbors matrix getter.
+	 * 
+	 * @return List of unique patterns and their neighbors.
+	 */
 	public Map<String, Set<String>> neighbors() {
 		return NEIGHBORS;
 	}
 
+	/**
+	 * Starting piece getter.
+	 * 
+	 * @return Starting pattern.
+	 */
 	public String start() {
 		return start;
 	}
 
+	/**
+	 * Ending piece getter.
+	 * 
+	 * @return Ending pattern.
+	 */
 	public String end() {
 		return end;
 	}
 
+	/**
+	 * Size of the observation frame getter.
+	 * 
+	 * @return Size of reel visible part on the screen.
+	 */
 	public int frame() {
 		return frame;
 	}
+
+	/**
+	 * Generate random set of all unique observations.
+	 * 
+	 * @return Array with all unique observations.
+	 */
+	public String[] random() {
+		List<String> list = new ArrayList<String>(NEIGHBORS.keySet());
+		Collections.shuffle(list);
+
+		String[] array = new String[list.size()];
+		list.toArray(array);
+
+		return array;
+	}
+
+	/**
+	 * Evaluate the quality of particular pieces set.
+	 * 
+	 * @param pieces
+	 *            Array of pieces.
+	 * 
+	 * @return Array with evaluations.
+	 */
+	public double[] evaluate(String[] pieces) {
+		String reel = "";
+		for (String piece : pieces) {
+			String merged = merge(reel, piece);
+
+			if (reel.equals(merged) == true) {
+				reel += piece;
+			}
+		}
+
+		String[] wrong = wrongSegments(reel);
+		String[] missing = missingObservations(reel);
+
+		return new double[] { (double) distance(reel), (double) reel.length(), (double) wrong.length,
+				(double) missing.length };
+	}
+
 }

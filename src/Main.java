@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Application single entry point class.
  * 
@@ -99,7 +101,7 @@ public class Main {
 		System.out.println(reel.neighbors());
 
 		MonteCarlo monte = new MonteCarlo(reel);
-		monte.generate(100000000L, 10000L, 10, 10);
+		System.out.println(monte.generate(100000000L, 10000L, 10, 10));
 
 		System.out.println("FINISH");
 	}
