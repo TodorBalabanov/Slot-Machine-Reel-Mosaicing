@@ -82,18 +82,17 @@ class MonteCarloGenerator {
 		Set<String> solutions = new HashSet<String>();
 		for (long g = 0L, interval = (experiments / progress) <= 0 ? 1
 				: (experiments / progress); g < experiments; g++) {
+			/*
+			 * Progress report.
+			 */
 			if (g % interval == 0) {
 				System.err.println(String.format("%5.2f", (100D * g / experiments)) + "%");
 			}
 
-			solutions.add((String) stairs(model.start()));
-		}
-
-		/*
-		 * Print solutions with frequencies distance.
-		 */
-		String result = "";
-		for (String solution : solutions) {
+			/*
+			 * Solution generation.
+			 */
+			String solution = stairs(model.start());
 			String[] wrong = model.wrongSegments(solution);
 			String[] missing = model.missingObservations(solution);
 
@@ -111,6 +110,16 @@ class MonteCarloGenerator {
 				continue;
 			}
 
+			solutions.add(solution);
+		}
+
+		/*
+		 * Print solutions with frequencies distance.
+		 */
+		String result = "";
+		for (String solution : solutions) {
+			String[] wrong = model.wrongSegments(solution);
+			String[] missing = model.missingObservations(solution);
 			result += wrong.length + "\t" + missing.length + "\t" + model.distance(solution) + "\t" + solution.length()
 					+ "\t" + solution + "\t" + Arrays.toString(wrong) + "\t" + Arrays.toString(missing);
 			result += "\r\n";
