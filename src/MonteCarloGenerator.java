@@ -3,11 +3,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Monte-Carlo search solver.
+ * Monte-Carlo search reels generator.
  * 
  * @author Todor Balabanov
  */
-class MonteCarlo {
+class MonteCarloGenerator {
 
 	/**
 	 * Reel info reference.
@@ -20,8 +20,8 @@ class MonteCarlo {
 	 * @param reel
 	 *            Reel info reference.
 	 */
-	MonteCarlo(Reel model) {
-		MonteCarlo.model = model;
+	MonteCarloGenerator(Reel model) {
+		MonteCarloGenerator.model = model;
 	}
 
 	/**

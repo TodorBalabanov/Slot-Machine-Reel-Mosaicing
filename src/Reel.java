@@ -388,9 +388,28 @@ class Reel {
 	 * @return Array with all unique observations.
 	 */
 	public String[] random() {
+		/*
+		 * Get all unique pieces.
+		 */
 		List<String> list = new ArrayList<String>(NEIGHBORS.keySet());
+
+		/*
+		 * Add some more pieces in random order.
+		 */
+		for (String piece : NEIGHBORS.keySet()) {
+			if (Util.PRNG.nextBoolean() == true) {
+				list.add(piece);
+			}
+		}
+
+		/*
+		 * Shuffle the order of the selected pieces.
+		 */
 		Collections.shuffle(list);
 
+		/*
+		 * Transform to array.
+		 */
 		String[] array = new String[list.size()];
 		list.toArray(array);
 
@@ -420,6 +439,27 @@ class Reel {
 
 		return new double[] { (double) distance(reel), (double) reel.length(), (double) wrong.length,
 				(double) missing.length };
+	}
+
+	/**
+	 * Reconstruct reel of particular pieces set.
+	 * 
+	 * @param pieces
+	 *            Array of pieces.
+	 * 
+	 * @return Generated reel.
+	 */
+	public String reconstruct(List<String> pieces) {
+		String reel = "";
+		for (String piece : pieces) {
+			String merged = merge(reel, piece);
+
+			if (reel.equals(merged) == true) {
+				reel += piece;
+			}
+		}
+
+		return reel;
 	}
 
 }

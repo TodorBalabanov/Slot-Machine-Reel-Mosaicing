@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.math3.genetics.AbstractListChromosome;
@@ -98,4 +99,12 @@ class PieceListChromosome extends AbstractListChromosome<String> {
 		return new PieceListChromosome(representation, true);
 	}
 
+	/**
+	 * Chromosome representation getter.
+	 * 
+	 * @return List with chromosome elements.
+	 */
+	public List<String> representation() {
+		return new ArrayList<String>(getRepresentation());
+	}
 }
