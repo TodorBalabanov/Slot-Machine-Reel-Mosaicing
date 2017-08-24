@@ -212,7 +212,7 @@ public class Main {
 		System.out.println(reel.neighbors());
 
 		MonteCarloGenerator monte = new MonteCarloGenerator(reel);
-		System.out.println(monte.generate(1000000000L, 10000L, 6, 10));
+		System.out.println(monte.generate(100000000L, 10000L, 6, 10));
 
 		// GeneticAlgorithmGenerator genetic = new
 		// GeneticAlgorithmGenerator(reel);
