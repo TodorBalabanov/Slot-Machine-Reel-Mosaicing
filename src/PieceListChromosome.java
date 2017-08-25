@@ -78,7 +78,8 @@ class PieceListChromosome extends AbstractListChromosome<String> {
 		list.toArray(array);
 
 		double values[] = model.evaluate(array);
-		return 0 - values[0] - values[1] - values[2] - values[3];
+		return 0 - 1 * values[0] - 0 * values[1] - 1 * (values[2] == 0 ? 0 : Math.log(values[2]))
+				- 1 * (values[3] == 0 ? 0 : Math.log(values[3]));
 	}
 
 	/**
