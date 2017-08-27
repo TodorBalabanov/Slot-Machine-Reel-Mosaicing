@@ -174,7 +174,7 @@ public class Main {
 
 				"ppppssssz",
 
-				new String[] { "zccccdddd", "ggggcccczppppssss", "llllgggg7777ppppdddd", "sssllll7777ppppdddd",
+				new String[] { "zccccdddd", "ggggcccczppppssss", "llllgggg7777ppppdddd", "ssssllll7777ppppdddd",
 						"ppppssssz" },
 
 				60, 280
@@ -188,6 +188,15 @@ public class Main {
 
 		System.out.println(reel.observations());
 		System.out.println(reel.neighbors());
+
+		// String solution = "";
+		// String[] wrong = reel.wrongSegments(solution);
+		// String[] missing = reel.missingObservations(solution);
+		// System.out.println(
+		// wrong.length + "\t" + missing.length + "\t" + reel.distance(solution) + "\t"
+		// + solution.length() + "\t"
+		// + solution + "\t" + Arrays.toString(wrong) + "\t" +
+		// Arrays.toString(missing));
 
 		MonteCarloGenerator monte = new MonteCarloGenerator(reel);
 		System.out.println(monte.generate(1000000000L, 10000L, 6, 10));
