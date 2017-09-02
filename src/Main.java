@@ -178,7 +178,7 @@ public class Main {
 
 				new String[] { "7777dddd", "ggggppppzgggg", "sssscccczdddd", "ggggllllzssss", "ccccssss7777" },
 
-				75, 110
+				75, 160
 
 		);
 
@@ -284,7 +284,7 @@ public class Main {
 		// Arrays.toString(missing));
 
 		MonteCarloGenerator monte = new MonteCarloGenerator(reel);
-		System.out.println(monte.generate(1000000000L, 10000L, 6, 10));
+		System.out.println(monte.generate(10000000L, 10000L, 6, 10));
 
 		// GeneticAlgorithmGenerator genetic = new
 		// GeneticAlgorithmGenerator(reel);
