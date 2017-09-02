@@ -85,7 +85,9 @@ public class Main {
 				"sssp", "ddll", "pppp", "ddzp", "plll", "dddd", "sppp", "llld", "cccc", "pzss", "pzcc", "gggp", "slll",
 				"lppp", "77ll", "lllp", "cggg", "dddd", "pppp", "llll", "pppz", "pddd", "lllc", "cccc", "sssc", "pppl",
 				"cggg", "gggg", "sssc", "cccd", "gppp", "ddds", "cccd", "cddd", "ssll", "ddd7", "pppz", "ccdd", "pccc",
-				"ccgg", "cccg", "ppss", "llll", "7777", "pzss", "gppp", "lllp", "sspp", },
+				"ccgg", "cccg", "ppss", "llll", "7777", "pzss", "gppp", "lllp", "sspp",
+
+		},
 
 				"7777llll",
 
@@ -94,6 +96,89 @@ public class Main {
 				new String[] { "7777llll", "ddddzpppp", "ppppzcccc", "ppppzssss", "dddd7777" },
 
 				60, 140
+
+		);
+
+		Reel third = new Reel(new String[] {
+
+				"sssc", "sssc", "ppps", "gggp", "cccc", "lllc", "lsss", "dppp", "cppp", "slll", "sccc", "ggpp", "pzgg",
+				"ggll", "sccc", "ddll", "dlll", "llcc", "dddl", "cccd", "czdd", "cccc", "dddd", "lggg", "cccl", "ppzg",
+				"sscc", "ssss", "ppgg", "sssl", "dddd", "gppp", "dlll", "ggpp", "ssss", "psss", "slll", "sssc", "cccc",
+				"gggp", "dccc", "ggpp", "777d", "sss7", "pppp", "sssc", "pccc", "cccc", "cccl", "gggs", "cccp", "sscc",
+				"clll", "ddll", "ssss", "gggg", "gggs", "cppp", "cccc", "lzss", "llss", "czdd", "llll", "cccp", "cccp",
+				"ppcc", "ccll", "pccc", "gsss", "gppp", "dddd", "pzgg", "dlll", "ss77", "sccc", "ssss", "ssss", "ggpp",
+				"llll", "dddd", "cccs", "cddd", "cppp", "sscc", "ccpp", "pppg", "77dd", "7ddd", "sccc", "llll", "csss",
+				"ssll", "dddc", "cccc", "cccz", "dddc", "pppp", "ssss", "ssss", "cccc", "ccpp", "pzgg", "cccc", "dddp",
+				"dddc", "cccz", "ssss", "ppps", "slll", "pppc", "pppp", "ssss", "gppp", "ccpp", "sssl", "sscc", "ss77",
+				"ssss", "ccll", "cccc", "ppzg", "ggss", "cccc", "zsss", "7777", "ssll", "cccs", "ccss", "slll", "ggss",
+				"ccpp", "ddcc", "gggg", "ggss", "sss7", "ppss", "glll", "gggp", "ssss", "s777", "ppzg", "sssc", "lllg",
+				"ppss", "lggg", "dccc", "lccc", "ddpp", "ccpp", "cddd", "psss", "ccss", "pzgg", "ppcc", "cccd", "ggll",
+				"ssll", "llll", "pppz", "lllg", "llzs", "pppp", "dppp", "77dd", "sssc", "ppcc", "llcc", "dccc", "777d",
+				"pppg", "sssl", "sscc", "cccc", "7777", "llll", "ccpp", "dlll", "dddd", "sccc", "cccc", "ssss", "dddd",
+				"lccc", "ppcc", "cccp", "ggll", "dccc", "sccc", "zggg", "ssss", "llzs", "llgg", "zsss", "ccll", "cccp",
+				"csss", "pppz", "dddd", "sccc", "cppp", "ccpp", "ssll", "ccll", "sss7", "cccz", "llgg", "llls", "ppss",
+				"lllz", "psss", "ssss", "sssc", "zggg", "sss7", "77dd", "ggss", "lccc", "gggs", "ddcc", "sscc", "cccc",
+				"dppp", "dddp", "ssss", "dddd", "dddp", "pppz", "lggg", "lccc", "cccz", "cccp", "lccc", "lzss", "zsss",
+				"sssc", "zddd", "sccc", "ccss", "gggg", "cccc", "lsss", "cccl", "cccc", "ssss", "ssll", "lzss", "ssss",
+				"sccc", "dddd", "pppp", "sscc", "dddd", "llgg", "dlll", "pggg", "sssc", "zddd", "ppps", "ddll", "ssss",
+				"77dd", "lllz", "cccs", "cppp", "zggg", "cccl", "gggg", "pppp", "cccp", "sccc", "ddpp", "7777", "dddd",
+				"dppp", "pppp", "sscc", "777d", "gggg", "cccc", "lllz", "zggg", "dccc", "sccc", "lllg", "ssss", "clll",
+				"gggg", "sssc", "sssl", "ccll", "sssc", "lsss", "zsss", "ccpp", "cddd", "pppc", "gppp", "czdd", "llll",
+				"dppp", "pppc", "sssc", "llcc", "cccc", "sccc", "dccc", "ssss", "sssl", "gggl", "dddl", "gggp", "ssss",
+				"dddl", "77dd", "gggp", "sccc", "ssss", "cccz", "llll", "ggss", "lllc", "czdd", "cccp", "gggg", "sssc",
+				"gggl", "gggl", "lggg", "ccpp", "dlll", "llss", "dddd", "sssl", "ccss", "llgg", "cddd", "sccc", "ssll",
+				"ddpp", "cccl", "cccc", "dlll", "llls", "ggll", "pppp", "7777", "dddd", "gggg", "dddd", "ss77", "dddd",
+				"dddc", "ccdd", "czdd", "cccl", "gggs", "ss77", "cccc", "slll", "pppp", "pppp", "lsss", "ccpp", "ssss",
+				"cccc", "cccp", "cddd", "cccp", "pppp", "lsss", "pppc", "cccz", "dddl", "dddl", "s777", "sss7", "dppp",
+				"cccc", "ppgg", "ccss", "llll", "llss", "ggpp", "dppp", "czdd", "cppp", "ppcc", "zsss", "pppp", "dlll",
+				"sccc", "lsss", "ddcc", "ssss", "pccc", "lzss", "ggss", "cccc", "sssc", "ppss", "sssc", "ssss", "gggg",
+				"sscc", "sccc", "ssss", "cccp", "777d", "ssll", "dddc", "sssc", "ss77", "ccdd", "czdd", "clll", "ccdd",
+				"pzgg", "ppcc", "lllc", "cccp", "gggl", "ccss", "cccc", "dddc", "llgg", "dccc", "gggg", "lllg", "cccd",
+				"ppps", "pppp", "sscc", "gggl", "llll", "ppss", "gggg", "llls", "7ddd", "slll", "pppg", "ccll", "pggg",
+				"cczd", "dddd", "lccc", "sssc", "cccc", "llll", "cccc", "ppgg", "ccll", "s777", "glll", "ddpp", "cccp",
+				"ddll", "pppc", "llll", "dppp", "llss", "llll", "llll", "ssss", "ccss", "sccc", "ccpp", "lllc", "llcc",
+				"ccll", "lzss", "llgg", "csss", "pppp", "s777", "ddll", "lccc", "slll", "dddd", "sccc", "lggg", "sccc",
+				"777d", "777d", "dddd", "cccs", "ppps", "pppz", "csss", "zddd", "cppp", "gggs", "glll", "llcc", "sssl",
+				"pppp", "sscc", "llls", "dddl", "sccc", "llll", "cccz", "sscc", "sscc", "lllg", "gggg", "cccc", "sccc",
+				"sccc", "cppp", "lzss", "pppp", "pppz", "sscc", "lzss", "sccc", "dddd", "sss7", "cccc", "lccc", "ss77",
+				"dddd", "s777", "ppzg", "lllc", "dddl", "pppp", "s777", "llls", "cppp", "pppg", "llll", "sscc", "ggpp",
+				"llll", "gggg", "s777", "cccs", "sss7", "sss7", "cccl", "pccc", "llgg", "777d", "777d", "ssss", "zddd",
+				"llgg", "s777", "dccc", "sscc", "gggl", "pccc", "lllc", "7777", "sscc", "lccc", "ggss", "pppp", "ssss",
+				"pggg", "7ddd", "dppp", "llll", "llss", "ppss", "gppp", "dccc", "sssl", "ssss", "gppp", "ccpp", "pppp",
+				"sccc", "ccdd", "llll", "cccc", "sssc", "llss", "cccc", "glll", "cccp", "sccc", "lsss", "ccpp", "llss",
+				"ddll", "sscc", "ggss", "llls", "ss77", "s777", "cccz", "gggl", "ddll", "cppp", "ssss", "sssc", "glll",
+				"pggg", "lllc", "ssss", "csss", "77dd", "ggll", "dddd", "dccc", "pppp", "ssss", "pppp", "ddcc", "llll",
+				"cppp", "zddd", "ssss", "gggg", "ssss", "llss", "cccc", "ppps", "gggg", "cccz", "sssc", "dddd", "dddd",
+				"dddd", "clll", "cccp", "77dd", "pggg", "ggss", "pppc", "llll", "dddc", "7ddd", "lccc", "llll", "glll",
+				"sscc", "pccc", "cddd", "pzgg", "cccz", "cddd", "llll", "ssss", "pppp", "ddll", "ggll", "clll", "gsss",
+				"pppg", "pppz", "glll", "ddcc", "lllg", "ssss", "czdd", "lllz", "sssc", "lzss", "sssc", "ccpp", "cccl",
+				"gggg", "sccc", "llll", "cccz", "pppp", "llll", "pppc", "7ddd", "cccc", "ggpp", "ssll", "dppp", "ssss",
+				"sssl", "ccpp", "ggll", "pppp", "llcc", "gggg", "llgg", "dddl", "cccc", "cccc", "ppgg", "llll", "ppgg",
+				"dddp", "sscc", "lllg", "dppp", "sssl", "sscc", "gggs", "cccp", "glll", "gggs", "sssc", "lllz", "pppp",
+				"gggs", "clll", "ssss", "llls", "dddd", "pggg", "ppgg", "lzss", "cccc", "zggg", "dddl", "ss77", "cddd",
+				"pppp", "cccz", "sscc", "cccz", "llcc", "cppp", "pppp", "ggpp", "zddd", "dddd", "sscc", "sss7", "lsss",
+				"7777", "ppss", "llss", "zggg", "sccc", "ppps", "ccpp", "sscc", "sscc", "csss", "ggss", "cczd", "zsss",
+				"ggss", "lggg", "pppp", "llll", "ppgg", "gggs", "dccc", "lsss", "cccp", "llll", "llll", "sscc", "7ddd",
+				"ccpp", "pppz", "sssc", "sssl", "sccc", "sscc", "777d", "sssc", "dddl", "sssc", "cczd", "cccc", "pppp",
+				"pccc", "cccc", "pppp", "csss", "ddll", "ggll", "ccpp", "ss77", "lllc", "ccpp", "clll", "dddc", "pppp",
+				"cccs", "ccpp", "dddp", "lggg", "sssc", "dddd", "ddpp", "sscc", "gggp", "zsss", "dddp", "llzs", "llgg",
+				"pppz", "ssll", "zsss", "cccc", "slll", "gggl", "ccpp", "llll", "cccp", "sscc", "ssss", "sccc", "sssl",
+				"czdd", "ddll", "dddd", "llls", "dlll", "llll", "cccl", "cccc", "sscc", "llll", "ppcc", "dddd", "llll",
+				"cccd", "ssss", "llcc", "pppp", "cccz", "dppp", "dddd", "zddd", "cccp", "cccc", "llll", "ppps", "sssc",
+				"ssss", "cczd", "pppp", "psss", "dccc", "pppp", "cccp", "cccp", "dddp", "gggs", "sssc", "ppps", "cppp",
+				"llls", "llll", "ccpp", "pppg", "77dd", "llll", "pppg", "llll", "psss", "cccc", "7ddd", "cddd", "llss",
+				"cccc", "pzgg", "zggg", "ppcc", "llzs", "dddl", "ccpp", "gsss", "clll", "cccl", "cczd", "ssss", "psss",
+				"llss", "ssss", "llzs", "sscc", "dccc", "gggp", "cccl", "sscc", "llgg", "pppp",
+
+		},
+
+				"7777dddd",
+
+				"ccccssss7777",
+
+				new String[] { "7777dddd", "ggggppppzgggg", "sssscccczdddd", "ggggllllzssss", "ccccssss7777" },
+
+				75, 110
 
 		);
 
@@ -184,7 +269,7 @@ public class Main {
 		/*
 		 * Just point the reference.
 		 */
-		Reel reel = fifth;
+		Reel reel = third;
 
 		System.out.println(reel.observations());
 		System.out.println(reel.neighbors());
