@@ -284,7 +284,7 @@ public class Main {
 		// Arrays.toString(missing));
 
 		MonteCarloGenerator monte = new MonteCarloGenerator(reel);
-		System.out.println(monte.generate(10000000L, 10000L, 6, 10));
+		System.out.println(monte.generate(1000000000L, 10000L, 6, 10));
 
 		// GeneticAlgorithmGenerator genetic = new
 		// GeneticAlgorithmGenerator(reel);
