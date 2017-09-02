@@ -274,14 +274,15 @@ public class Main {
 		System.out.println(reel.observations());
 		System.out.println(reel.neighbors());
 
-		// String solution = "";
-		// String[] wrong = reel.wrongSegments(solution);
-		// String[] missing = reel.missingObservations(solution);
-		// System.out.println(
-		// wrong.length + "\t" + missing.length + "\t" + reel.distance(solution) + "\t"
-		// + solution.length() + "\t"
-		// + solution + "\t" + Arrays.toString(wrong) + "\t" +
-		// Arrays.toString(missing));
+		/*
+		 * For single solution checking.
+		 */
+//		String solution = "";
+//		String[] wrong = reel.wrongSegments(solution);
+//		String[] missing = reel.missingObservations(solution);
+//		System.out.println(
+//				wrong.length + "\t" + missing.length + "\t" + reel.distance(solution) + "\t" + solution.length() + "\t"
+//						+ solution + "\t" + Arrays.toString(wrong) + "\t" + Arrays.toString(missing));
 
 		MonteCarloGenerator monte = new MonteCarloGenerator(reel);
 		System.out.println(monte.generate(1000000000L, 10000L, 6, 10));
