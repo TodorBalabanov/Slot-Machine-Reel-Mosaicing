@@ -364,14 +364,18 @@ public class Main {
 		// String[] wrong = reel.wrongSegments(solution);
 		// String[] missing = reel.missingObservations(solution);
 		// System.out.println(
-		// wrong.length + "\t" + missing.length + "\t" + reel.distance(solution) + "\t"
-		// + solution.length() + "\t"
-		// + solution + "\t" + Arrays.toString(wrong) + "\t" +
-		// Arrays.toString(missing));
+		// 		wrong.length + "\t" + missing.length + "\t" + reel.distance(solution) + "\t" + solution.length() + "\t"
+		// 				+ solution + "\t" + Arrays.toString(wrong) + "\t" + Arrays.toString(missing));
 
+		/*
+		 * Monte-Carlo search based optimization.
+		 */
 		MonteCarloGenerator monte = new MonteCarloGenerator(reel);
 		System.out.println(monte.generate(100000000L, 10000L, 6, 10));
 
+		/*
+		 * Genetic algorithm based optimization.
+		 */
 		// GeneticAlgorithmGenerator genetic = new
 		// GeneticAlgorithmGenerator(reel);
 		// System.out.println(genetic.generate(60L, 23, 0.9, 0.1, 0.1, 2));
