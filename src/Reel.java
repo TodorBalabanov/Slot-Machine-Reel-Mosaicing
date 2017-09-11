@@ -97,7 +97,8 @@ class Reel {
 			}
 
 			/*
-			 * Each combination should be presented only once in the neighbor matrix.
+			 * Each combination should be presented only once in the neighbor
+			 * matrix.
 			 */
 			if (NEIGHBORS.containsKey(observation)) {
 				continue;
@@ -250,13 +251,61 @@ class Reel {
 	}
 
 	/**
+	 * Check reel for repeating segments.
+	 * 
+	 * @param reel
+	 *            Generate reel.
+	 * @return Number of segments which repeats.
+	 */
+	String[] repeatingSegments(String reel) {
+		Map<String, Integer> counters = new HashMap<String, Integer>();
+
+		/*
+		 * Check all patterns with each other. It is kind of autocorrelation.
+		 */
+		for (int i = 0; i < reel.length() - frame - 1; i++) {
+			String pattern = reel.substring(i, i + frame);
+
+			/*
+			 * Each pattern is a key in the map.
+			 */
+			if (counters.containsKey(pattern) == false) {
+				counters.put(pattern, 0);
+			}
+
+			for (int j = i + 1; j < reel.length() - frame; j++) {
+				String check = reel.substring(j, j + frame);
+
+				/*
+				 * Increase counter if there is a repeat.
+				 */
+				if (pattern.equals(check) == true) {
+					counters.put(pattern, counters.get(pattern) + 1);
+				}
+			}
+		}
+
+		/*
+		 * Form final result.
+		 */
+		int i = 0;
+		String result[] = new String[counters.keySet().size()];
+		for(String pattern : counters.keySet()) {
+			result[i++] = "" + counters.get(pattern) + " " + pattern;
+		}
+		
+		return result;
+	}
+
+	/**
 	 * Merge reel with neighbor at the end.
 	 * 
 	 * @param reel
 	 *            Current reel.
 	 * @param neighbor
 	 *            One of the neighbors.
-	 * @return Reel merged with the neighbor or empty string if there is a problem.
+	 * @return Reel merged with the neighbor or empty string if there is a
+	 *         problem.
 	 */
 	String merge(String reel, String neighbor) {
 		/*
@@ -264,7 +313,8 @@ class Reel {
 		 */
 		for (int overlap = neighbor.length() - 1; overlap > 0; overlap--) {
 			/*
-			 * If current reel does not end with the current checked neighbor we do nothing.
+			 * If current reel does not end with the current checked neighbor we
+			 * do nothing.
 			 */
 			if (reel.endsWith(neighbor.substring(0, neighbor.length() - overlap)) == false) {
 				continue;
@@ -283,8 +333,8 @@ class Reel {
 	}
 
 	/**
-	 * Euclidean distance between reel symbols frequencies and observation symbols
-	 * frequencies.
+	 * Euclidean distance between reel symbols frequencies and observation
+	 * symbols frequencies.
 	 * 
 	 * @param reel
 	 *            Generated reel.
@@ -436,9 +486,10 @@ class Reel {
 
 		String[] wrong = wrongSegments(reel);
 		String[] missing = missingObservations(reel);
+		String[] repeats = repeatingSegments(reel);
 
 		return new double[] { (double) distance(reel), (double) reel.length(), (double) wrong.length,
-				(double) missing.length };
+				(double) missing.length, (double) repeats.length };
 	}
 
 	/**
