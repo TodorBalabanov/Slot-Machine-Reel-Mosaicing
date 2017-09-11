@@ -101,13 +101,15 @@ public class Main {
 		/*
 		 * For single solution checking.
 		 */
-		String solution = "";
-		String[] wrong = reel.wrongSegments(solution);
-		String[] missing = reel.missingObservations(solution);
-		String[] repeats = reel.repeatingSegments(solution);
-		System.out.println(wrong.length + "\t" + missing.length + "\t" + repeats.length + "\t" + reel.distance(solution)
-				+ "\t" + solution.length() + "\t" + solution + "\t" + Arrays.toString(wrong) + "\t"
-				+ Arrays.toString(missing) + "\t" + Arrays.toString(repeats));
+		// String solution = "";
+		// String[] wrong = reel.wrongSegments(solution);
+		// String[] missing = reel.missingObservations(solution);
+		// String[] repeats = reel.repeatingSegments(solution);
+		// System.out.println(wrong.length + "\t" + missing.length + "\t" +
+		// repeats.length + "\t" + reel.distance(solution)
+		// + "\t" + solution.length() + "\t" + solution + "\t" +
+		// Arrays.toString(wrong) + "\t"
+		// + Arrays.toString(missing) + "\t" + Arrays.toString(repeats));
 
 		/*
 		 * Monte-Carlo search based optimization.
