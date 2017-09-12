@@ -546,23 +546,26 @@ public class Main {
 
 		/*
 		 * For single solution checking.
-		 */
-		{
+		 */ {
 			Reel reel = reels[0];
-
 			String solution = "";
-			String[] wrong = reel.wrongSegments(solution);
-			String[] missing = reel.missingObservations(solution);
-			String[] repeats = reel.repeatingSegments(solution);
-			System.out.println(wrong.length + "\t" + missing.length + "\t" + repeats.length + "\t"
-					+ reel.distance(solution) + "\t" + solution.length() + "\t" + solution + "\t"
-					+ Arrays.toString(wrong) + "\t" + Arrays.toString(missing) + "\t" + Arrays.toString(repeats));
+			// String[] wrong = reel.wrongSegments(solution);
+			// String[] missing = reel.missingObservations(solution);
+			// String[] repeats = reel.repeatingSegments(solution);
+			// System.out.println(wrong.length + "\t" + missing.length + "\t" +
+			// repeats.length + "\t"
+			// + reel.distance(solution) + "\t" + solution.length() + "\t" +
+			// solution + "\t"
+			// + Arrays.toString(wrong) + "\t" + Arrays.toString(missing) + "\t"
+			// + Arrays.toString(repeats));
 		}
 
 		/*
 		 * Generate all reels.
 		 */
 		for (int r = 0; r < reels.length; r++) {
+			System.out.println("REEL " + (r + 1));
+
 			/*
 			 * Just point the reference.
 			 */
