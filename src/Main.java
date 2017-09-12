@@ -12,7 +12,7 @@ public class Main {
 	 * 
 	 * Run command example:
 	 * 
-	 * java -cp .:./bin Main >./bin/out.txt
+	 * java -cp .:./bin Main >./bin/out.txt & disown
 	 * 
 	 * @param args
 	 *            Command line arguments.
