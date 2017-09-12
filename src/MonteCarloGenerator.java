@@ -120,8 +120,10 @@ class MonteCarloGenerator {
 		for (String solution : solutions) {
 			String[] wrong = model.wrongSegments(solution);
 			String[] missing = model.missingObservations(solution);
-			result += wrong.length + "\t" + missing.length + "\t" + model.distance(solution) + "\t" + solution.length()
-					+ "\t" + solution + "\t" + Arrays.toString(wrong) + "\t" + Arrays.toString(missing);
+			String[] repeats = model.repeatingSegments(solution);
+			result += wrong.length + "\t" + missing.length + "\t" + repeats.length + "\t" + model.distance(solution)
+					+ "\t" + solution.length() + "\t" + solution + "\t" + Arrays.toString(wrong) + "\t"
+					+ Arrays.toString(missing) + "\t" + Arrays.toString(repeats);
 			result += "\r\n";
 		}
 

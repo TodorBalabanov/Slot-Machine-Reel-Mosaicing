@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 /**
  * Application single entry point class.
  * 
