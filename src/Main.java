@@ -561,7 +561,7 @@ public class Main {
 		/*
 		 * Generate all reels.
 		 */
-		for (int r = 0; r < reels.length; r++) {
+		for (int r = 3; r < reels.length; r++) {
 			System.out.println("REEL " + (r + 1));
 
 			/*
