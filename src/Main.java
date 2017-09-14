@@ -561,7 +561,7 @@ public class Main {
 		/*
 		 * Generate all reels.
 		 */
-		for (int r = 3; r < reels.length; r++) {
+		for (int r = 0; r < reels.length; r++) {
 			System.out.println("REEL " + (r + 1));
 
 			/*
@@ -576,7 +576,7 @@ public class Main {
 			 * Monte-Carlo search based optimization.
 			 */
 			MonteCarloGenerator monte = new MonteCarloGenerator(reel);
-			System.out.println(monte.generate(100000000L, 10000L, 4, 8));
+			System.out.println(monte.generate(1000000L, 10000L, 4, 8));
 		}
 
 		/*
