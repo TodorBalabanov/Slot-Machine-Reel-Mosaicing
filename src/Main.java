@@ -546,26 +546,26 @@ public class Main {
 		/*
 		 * For single solution checking.
 		 */ {
-			String solution = "sssssppaaannnbbdccccaaammnnnpppppggccmmmmmdaannnnnnppppcccccmmmmmgggnnppggccmmmggggppaaaadccmmmdaabbbbdggnnppssss";
-			Reel reel = reels[0];
-			
-			String[] wrong = reel.wrongSegments(solution);
-			String[] missing = reel.missingObservations(solution);
-			String[] repeats = reel.repeatingSegments(solution);
-			
-			System.out.println(reel.observations());
-			System.out.println(reel.neighbors());
-			
-			System.out.println("Wrong : " + wrong.length + "\t" + "Missing : " + missing.length + "\t" + "Repeats : "
-					+ repeats.length + "\t" + "Distance : " + reel.distance(solution) + "\t" + "Length : "
-					+ solution.length() + "\t" + solution + "\t" + Arrays.toString(wrong) + "\t"
-					+ Arrays.toString(missing) + "\t" + Arrays.toString(repeats));
-			
-			for (int i = 0; i < solution.length(); i++) {
-				System.out.println(Symbol.letter("" + solution.charAt(i)).name());
-			}
+			String solution = "";
+			Reel reel = reels[4];
 
-			System.exit(0);
+//			String[] wrong = reel.wrongSegments(solution);
+//			String[] missing = reel.missingObservations(solution);
+//			String[] repeats = reel.repeatingSegments(solution);
+//
+//			System.out.println(reel.observations());
+//			System.out.println(reel.neighbors());
+//
+//			for (int i = 0; i < solution.length(); i++) {
+//				System.out.println(Symbol.letter("" + solution.charAt(i)).name());
+//			}
+//
+//			System.out.println("Wrong : " + wrong.length + "\t" + "Missing : " + missing.length + "\t" + "Repeats : "
+//					+ repeats.length + "\t" + "Distance : " + reel.distance(solution) + "\t" + "Length : "
+//					+ solution.length() + "\n" + solution + "\n" + Arrays.toString(wrong) + "\n"
+//					+ Arrays.toString(missing) + "\n" + Arrays.toString(repeats));
+//
+//			System.exit(0);
 		}
 
 		System.out.println("START");
@@ -588,7 +588,7 @@ public class Main {
 			 * Monte-Carlo search based optimization.
 			 */
 			MonteCarloGenerator monte = new MonteCarloGenerator(reel);
-			System.out.println(monte.generate(1000000L, 10000L, 4, 8));
+			System.out.println(monte.generate(100000000L, 10000L, 4, 8));
 		}
 
 		/*
