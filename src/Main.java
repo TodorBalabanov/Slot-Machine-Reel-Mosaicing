@@ -547,25 +547,27 @@ public class Main {
 		 * For single solution checking.
 		 */ {
 			String solution = "";
-			Reel reel = reels[4];
+			Reel reel = reels[0];
 
-//			String[] wrong = reel.wrongSegments(solution);
-//			String[] missing = reel.missingObservations(solution);
-//			String[] repeats = reel.repeatingSegments(solution);
-//
-//			System.out.println(reel.observations());
-//			System.out.println(reel.neighbors());
-//
-//			for (int i = 0; i < solution.length(); i++) {
-//				System.out.println(Symbol.letter("" + solution.charAt(i)).name());
-//			}
-//
-//			System.out.println("Wrong : " + wrong.length + "\t" + "Missing : " + missing.length + "\t" + "Repeats : "
-//					+ repeats.length + "\t" + "Distance : " + reel.distance(solution) + "\t" + "Length : "
-//					+ solution.length() + "\n" + solution + "\n" + Arrays.toString(wrong) + "\n"
-//					+ Arrays.toString(missing) + "\n" + Arrays.toString(repeats));
-//
-//			System.exit(0);
+			// String[] wrong = reel.wrongSegments(solution);
+			// String[] missing = reel.missingObservations(solution);
+			// String[] repeats = reel.repeatingSegments(solution);
+			//
+			// System.out.println(reel.observations());
+			// System.out.println(reel.neighbors());
+			//
+			// for (int i = 0; i < solution.length(); i++) {
+			// System.out.println(Symbol.letter("" + solution.charAt(i)).name());
+			// }
+			//
+			// System.out.println("Wrong : " + wrong.length + "\t" + "Missing : " +
+			// missing.length + "\t" + "Repeats : "
+			// + repeats.length + "\t" + "Distance : " + reel.distance(solution) + "\t" +
+			// "Length : "
+			// + solution.length() + "\n" + solution + "\n" + Arrays.toString(wrong) + "\n"
+			// + Arrays.toString(missing) + "\n" + Arrays.toString(repeats));
+			//
+			// System.exit(0);
 		}
 
 		System.out.println("START");
