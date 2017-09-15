@@ -97,8 +97,7 @@ class Reel {
 			}
 
 			/*
-			 * Each combination should be presented only once in the neighbor
-			 * matrix.
+			 * Each combination should be presented only once in the neighbor matrix.
 			 */
 			if (NEIGHBORS.containsKey(observation)) {
 				continue;
@@ -288,12 +287,25 @@ class Reel {
 		/*
 		 * Form final result.
 		 */
-		int i = 0;
-		String result[] = new String[counters.keySet().size()];
-		for(String pattern : counters.keySet()) {
-			result[i++] = "" + counters.get(pattern) + " " + pattern;
+		List<String> repeats = new ArrayList<String>();
+		for (String pattern : counters.keySet()) {
+			/*
+			 * Report only repeats.
+			 */
+			if (counters.get(pattern) <= 0) {
+				continue;
+			}
+
+			repeats.add("" + String.format("%4d", counters.get(pattern)) + " " + pattern);
 		}
-		
+		Collections.sort(repeats, Collections.reverseOrder());
+
+		/*
+		 * Export result in array.
+		 */
+		String result[] = new String[repeats.size()];
+		repeats.toArray(result);
+
 		return result;
 	}
 
@@ -304,8 +316,7 @@ class Reel {
 	 *            Current reel.
 	 * @param neighbor
 	 *            One of the neighbors.
-	 * @return Reel merged with the neighbor or empty string if there is a
-	 *         problem.
+	 * @return Reel merged with the neighbor or empty string if there is a problem.
 	 */
 	String merge(String reel, String neighbor) {
 		/*
@@ -313,8 +324,7 @@ class Reel {
 		 */
 		for (int overlap = neighbor.length() - 1; overlap > 0; overlap--) {
 			/*
-			 * If current reel does not end with the current checked neighbor we
-			 * do nothing.
+			 * If current reel does not end with the current checked neighbor we do nothing.
 			 */
 			if (reel.endsWith(neighbor.substring(0, neighbor.length() - overlap)) == false) {
 				continue;
@@ -333,8 +343,8 @@ class Reel {
 	}
 
 	/**
-	 * Euclidean distance between reel symbols frequencies and observation
-	 * symbols frequencies.
+	 * Euclidean distance between reel symbols frequencies and observation symbols
+	 * frequencies.
 	 * 
 	 * @param reel
 	 *            Generated reel.

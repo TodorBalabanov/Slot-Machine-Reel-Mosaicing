@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Application single entry point class.
  * 
@@ -16,7 +18,6 @@ public class Main {
 	 *            Command line arguments.
 	 */
 	public static void main(String[] args) {
-		System.out.println("START");
 
 		Reel reels[] = {
 
@@ -545,18 +546,29 @@ public class Main {
 		/*
 		 * For single solution checking.
 		 */ {
+			String solution = "sssssppaaannnbbdccccaaammnnnpppppggccmmmmmdaannnnnnppppcccccmmmmmgggnnppggccmmmggggppaaaadccmmmdaabbbbdggnnppssss";
 			Reel reel = reels[0];
-			String solution = "";
-			// String[] wrong = reel.wrongSegments(solution);
-			// String[] missing = reel.missingObservations(solution);
-			// String[] repeats = reel.repeatingSegments(solution);
-			// System.out.println(wrong.length + "\t" + missing.length + "\t" +
-			// repeats.length + "\t"
-			// + reel.distance(solution) + "\t" + solution.length() + "\t" +
-			// solution + "\t"
-			// + Arrays.toString(wrong) + "\t" + Arrays.toString(missing) + "\t"
-			// + Arrays.toString(repeats));
+			
+			String[] wrong = reel.wrongSegments(solution);
+			String[] missing = reel.missingObservations(solution);
+			String[] repeats = reel.repeatingSegments(solution);
+			
+			System.out.println(reel.observations());
+			System.out.println(reel.neighbors());
+			
+			System.out.println("Wrong : " + wrong.length + "\t" + "Missing : " + missing.length + "\t" + "Repeats : "
+					+ repeats.length + "\t" + "Distance : " + reel.distance(solution) + "\t" + "Length : "
+					+ solution.length() + "\t" + solution + "\t" + Arrays.toString(wrong) + "\t"
+					+ Arrays.toString(missing) + "\t" + Arrays.toString(repeats));
+			
+			for (int i = 0; i < solution.length(); i++) {
+				System.out.println(Symbol.letter("" + solution.charAt(i)).name());
+			}
+
+			System.exit(0);
 		}
+
+		System.out.println("START");
 
 		/*
 		 * Generate all reels.
